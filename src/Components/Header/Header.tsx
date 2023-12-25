@@ -5,13 +5,14 @@ import cart from '@/images/cart.png'
   import {BiCaretDown} from 'react-icons/bi'
   import {HiOutlineSearch} from 'react-icons/hi'
   import {SlLocationPin} from 'react-icons/sl'
+import Link from 'next/link'
 const Header = () => {
   return (
     <div className=' bg-amazon_blue h-20 w-full text-lightText sticky top-0 z-50'>
         <div className="h-full w-full mx-auto inline-flex items-center justify-between gap-1 mdl:gap-3 px-4 ">
-<div className="px-2 py-2 border border-transparent hover:border-white cursor-pointer duration-300 flex items-center justify-center h-[70%]">
+<Link href={'/'} className="px-2 py-2 border border-transparent hover:border-white cursor-pointer duration-300 flex items-center justify-center h-[70%]">
 <Image className='w-28 object-cover mt-1' src={logo} alt="Logo"/>
-</div>
+</Link>
 
 {/* delever */}
 <div className="mx-2 px-2 py-2 border border-transparent hover:border-white cursor-pointer duration-300 
@@ -48,11 +49,11 @@ hidden xl:inline-flex items-center justify-center h-[70%] gap-1">
     <p className='font-bold text-white '>& Favorite</p>
 </div>
 {/* Cart */}
-<div className='px-2 flex items-center border border-transparent hover:border-white cursor-pointer duration-300 h-[70%] relative'>
+<Link href={'/Cart'} className='px-2 flex items-center border border-transparent hover:border-white cursor-pointer duration-300 h-[70%] relative'>
     <Image src={cart} alt={'CartIcons'} className='w-auto object-cover h-8 '/>
     <p className='text-xs text-white font-bold mt-3'>Cart</p>
     <span className=' absolute text-amazon_yellow text-xs top-2 left-[29px] font-semibold'>0</span>
-</div>
+</Link>
         </div>
     </div>
   )
