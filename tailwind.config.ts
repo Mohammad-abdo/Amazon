@@ -22,7 +22,8 @@ const config: Config = {
    colors:{
     amazon_blue:"#131921",
     amazon_light:"#232F3E",
-    amazon_yellow:"febd69",
+    amazon_yellow:"#febd69",
+    amazon_yellow_shadow:"#ed9720",
     lightText:"#ccc"
    },
    fontFamily:{
