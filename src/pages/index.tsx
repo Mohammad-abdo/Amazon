@@ -8,14 +8,14 @@ interface props{
   productData:productProps
 }
 
-export default function Home({productDate}:props) {
+export default function Home({productData}:props) {
 
   return (
     <main className="" >
 <div className="max-w-screen-2xl mx-auto">
   <Banner/>
 <div className=" relative md:-mt-20 xl:-mt-60 lgl:-mt-32 z-20 mb-10">
-<Products productDate={productDate}/>
+<Products productData={productData}/>
 </div>
 </div>
     </main>
@@ -24,8 +24,8 @@ export default function Home({productDate}:props) {
 
 export const getServerSideProps=async () => {
   const res=await fetch("https://fakestoreapiserver.reactbd.com/tech")
- const productDate=await res.json()
+ const productData=await res.json()
 
- return {props:{productDate}}
+ return {props:{productData}}
   
 }
