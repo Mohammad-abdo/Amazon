@@ -24,7 +24,7 @@ export default function Home({productData}:props) {
 
 export const getServerSideProps=async () => {
   const res=await fetch("https://fakestoreapiserver.reactbd.com/tech")
- const productDate=await res.json()
+ const productData=await res.json()
 
  return {props:{productData}}
   
