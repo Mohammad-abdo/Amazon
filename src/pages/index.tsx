@@ -9,7 +9,7 @@ interface props{
 }
 
 export default function Home({productData}:props) {
-
+console.log(productData)
   return (
     <main className="" >
 <div className="max-w-screen-2xl mx-auto">
