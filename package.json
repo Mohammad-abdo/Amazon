@@ -9,11 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.0.1",
     "next": "^13.5.4",
+    "next-auth": "^4.24.5",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^4.12.0",
-    "react-responsive-carousel": "^3.2.23"
+    "react-redux": "^9.0.4",
+    "react-responsive-carousel": "^3.2.23",
+    "redux-persist": "^6.0.0"
   },
   "devDependencies": {
     "@types/node": "^20",

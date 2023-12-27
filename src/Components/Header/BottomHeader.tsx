@@ -1,5 +1,9 @@
 import React from 'react'
 import {LuMenu} from 'react-icons/lu'
+import { useDispatch, useSelector } from 'react-redux'
+import {  signOut } from "next-auth/react"
+import { StateProps } from '../../../type'
+import { removeUser } from '@/store/nextslice'
 const links=[
     {
         id:1,
@@ -29,6 +33,12 @@ const links=[
 
 ]
 const BottomHeader = () => {
+  const {userInfo}=useSelector((state:StateProps)=>state.next)
+  const dispatch =useDispatch()
+const handelSignOut=()=>{
+signOut()
+dispatch(removeUser())
+}
   return (
    
    <div className=' bg-amazon_light h-10 w-full text-sm text-white flex items-center px-4'>
@@ -42,7 +52,14 @@ const BottomHeader = () => {
     </a>
         ))
     }
-  <a href="#" className="hidden hover:text-red-400 text-amazon_yellow duration-300 md:inline-flex items-center  h-8 border cursor-pointer border-transparent hover:border-red-400 px-2"> Sign Out</a>
+  
+  {
+    userInfo && <button
+    onClick={handelSignOut}
+     className="hidden hover:text-red-400 text-amazon_yellow duration-300 md:inline-flex items-center 
+      h-8 border cursor-pointer border-transparent hover:border-red-400 px-2"> Sign Out</button>
+
+  }
     </div>
       
   )
