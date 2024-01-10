@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { StateProps, productProps } from '../../type'
+import { StateProps, productProps, storeProduct } from '../../type'
 import ProductCard from '@/Components/Products/ProductCard'
 import CartProduct from '@/Components/Products/CartProduct'
 import ResetCart from '@/Components/ResetCart'
@@ -27,7 +27,7 @@ const Cart = () => {
                </p>
             </div>
             <div className='pt-2 flex flex-col gap-2'>
-            {productData.map((item:StateProps)=>(
+            {productData.map((item:storeProduct)=>(
      <div key={item._id} className='pt-2 flex flex-col gap-2 '>
      <CartProduct item={item}/>
      </div>
