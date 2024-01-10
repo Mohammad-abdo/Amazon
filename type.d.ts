@@ -22,6 +22,7 @@ export interface storeProduct{
     quantaty:number;
 }
 export interface StateProps{
+    _id: Key | null | undefined;
     productData: [],
     favoriteData: [],
     next:any;
