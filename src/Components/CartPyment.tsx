@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { StateProps, storeProduct } from '../../type'
 
 const CartPyment = () => {
-    const {productData}=useSelector((state:StateProps)=>state.next)
+    const {productData,userInfo}=useSelector((state:StateProps)=>state.next)
    const [totalamount,setTotalamount]= useState(0) 
    useEffect(()=>{
     let amont=0
@@ -31,17 +31,35 @@ return;
         
         Total: <span className='font-bold text-xl'><FormattedPrice amount={totalamount}/></span>
         </p>
+          {
 
-        <div className='flex flex-col  items-center '>
-            <button 
-             className='w-[94%] h-10 bg-amazon_blue text-white rounded-lg text-sm font-semibold
-             hover:text-black cursor-not-allowed
-             hover:bg-amazon_yellow'
-            >Proceed to Buy</button>
-            <p 
-            className='text-xs mt-2 text-red-500 font-semibold animate-bounce'
-            >Please Login to continue</p>
-        </div>
+userInfo?
+
+
+<div className='flex flex-col  items-center '>
+<button 
+ className='w-[94%] h-10 bg-amazon_blue text-white
+  rounded-lg text-sm font-semibold
+ hover:text-black 
+ hover:bg-amazon_yellow duration-300' 
+>Proceed to Buy</button>
+
+</div>
+:
+
+
+<div className='flex flex-col  items-center '>
+<button 
+ className='w-[94%] h-10 bg-amazon_blue text-white rounded-lg text-sm font-semibold
+ hover:text-black cursor-not-allowed
+ hover:bg-amazon_yellow'
+>Proceed to Buy</button>
+<p 
+className='text-xs mt-2 text-red-500 font-semibold animate-bounce'
+>Please Login to continue</p>
+</div>
+          }
+       
     </div>
   )
 }
