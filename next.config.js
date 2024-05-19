@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  output: '',
   reactStrictMode: true,
   images:{
     domains:['i.ibb.co']
