@@ -23,10 +23,10 @@ const Footer = () => {
                   <Link href="/" className="hover:text-indigo-400 transition-colors duration-200">Home</Link>
                 </li>
                 <li>
-                  <Link href="/Cart" className="hover:text-indigo-400 transition-colors duration-200">Shopping Cart</Link>
+                  <Link href="/cart" className="hover:text-indigo-400 transition-colors duration-200">Shopping Cart</Link>
                 </li>
                 <li>
-                  <Link href="/Favorites" className="hover:text-indigo-400 transition-colors duration-200">Favorites & Wishlist</Link>
+                  <Link href="/favorites" className="hover:text-indigo-400 transition-colors duration-200">Favorites & Wishlist</Link>
                 </li>
               </ul>
             </div>

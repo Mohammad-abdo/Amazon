@@ -4,6 +4,7 @@ import { resetCart } from '@/store/nextslice'
 import Link from 'next/link'
 import { HiCheckCircle, HiHome } from 'react-icons/hi'
 import { MdEmail } from 'react-icons/md'
+import Head from 'next/head'
 
 const Success = () => {
   const dispatch = useDispatch()
@@ -19,7 +20,12 @@ const Success = () => {
   }, [dispatch])
 
   return (
-    <div className="min-h-[75vh] bg-slate-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <>
+      <Head>
+        <title>Order Success - Nexis Premium E-Commerce</title>
+        <meta name="description" content="Your order has been successfully placed at Nexis. Checkout complete." />
+      </Head>
+      <div className="min-h-[75vh] bg-slate-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full bg-white border border-slate-100 p-8 rounded-3xl text-center shadow-md flex flex-col items-center justify-center">
         {/* Animated Checkmark Icon */}
         <div className="relative w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mb-6 text-green-500 shadow-sm">
@@ -58,6 +64,7 @@ const Success = () => {
         </Link>
       </div>
     </div>
+    </>
   )
 }
 

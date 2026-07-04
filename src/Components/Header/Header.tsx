@@ -116,7 +116,7 @@ const Header = () => {
 
           {/* Favorites Wishlist Link */}
           <Link 
-            href="/Favorites" 
+            href="/favorites" 
             className="relative flex items-center gap-1.5 py-1.5 px-3 rounded-xl border border-transparent hover:border-slate-800 hover:bg-slate-900/50 cursor-pointer transition-all duration-300"
             title="Wishlist"
           >
@@ -134,7 +134,7 @@ const Header = () => {
 
           {/* Shopping Cart Link */}
           <Link 
-            href="/Cart" 
+            href="/cart" 
             className="relative flex items-center gap-2 py-1.5 px-3 rounded-xl border border-transparent hover:border-slate-850 hover:bg-slate-900/50 bg-slate-900/30 border-slate-800 cursor-pointer transition-all duration-300"
             title="Shopping Cart"
           >

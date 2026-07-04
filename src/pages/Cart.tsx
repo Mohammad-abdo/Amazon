@@ -6,12 +6,18 @@ import ResetCart from '@/Components/ResetCart'
 import Link from 'next/link'
 import CartPyment from '@/Components/CartPyment'
 import { HiOutlineShoppingCart } from 'react-icons/hi'
+import Head from 'next/head'
 
 const Cart = () => {
   const { productData } = useSelector((state: StateProps) => state.next)
 
   return (
-    <div className="max-w-screen-2xl mx-auto py-8 px-4 sm:px-6 min-h-[70vh] bg-slate-50">
+    <>
+      <Head>
+        <title>Shopping Cart - Nexis Premium E-Commerce</title>
+        <meta name="description" content="Review your selected products, adjust item quantities, and checkout securely at Nexis." />
+      </Head>
+      <div className="max-w-screen-2xl mx-auto py-8 px-4 sm:px-6 min-h-[70vh] bg-slate-50">
       {productData.length > 0 ? (
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
           {/* Cart Products List */}
@@ -59,6 +65,7 @@ const Cart = () => {
         </div>
       )}
     </div>
+    </>
   )
 }
 

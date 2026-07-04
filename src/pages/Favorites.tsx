@@ -3,11 +3,12 @@ import { useSelector, useDispatch } from 'react-redux'
 import { StateProps, storeProduct } from '../../type'
 import Image from 'next/image'
 import Link from 'next/link'
+import Head from 'next/head'
 import FormattedPrice from '@/Components/Products/FormattedPrice'
 import { deleteFavorite, addToCart } from '@/store/nextslice'
 import { FaHeartBroken } from 'react-icons/fa'
 import { HiOutlineHeart as HeartIcon, HiShoppingCart } from 'react-icons/hi'
-import { IoMdClose } from 'react-icons/io'
+import { IoMdClose as CloseIcon } from 'react-icons/io'
 
 const Favorites = () => {
   const { favoriteData } = useSelector((state: StateProps) => state.next)
@@ -31,7 +32,12 @@ const Favorites = () => {
   }
 
   return (
-    <div className="max-w-screen-2xl mx-auto py-8 px-4 sm:px-6 min-h-[70vh] bg-slate-50">
+    <>
+      <Head>
+        <title>My Wishlist & Favorites - Nexis Premium E-Commerce</title>
+        <meta name="description" content="View your saved items, move items to cart, and manage your custom Nexis shopping wishlist." />
+      </Head>
+      <div className="max-w-screen-2xl mx-auto py-8 px-4 sm:px-6 min-h-[70vh] bg-slate-50">
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-between border-b border-slate-150 pb-4 mb-6">
           <h1 className="text-2xl font-bold text-slate-800 flex items-center gap-2">
@@ -102,7 +108,7 @@ const Favorites = () => {
                       className="h-10 px-3 border border-slate-200 text-slate-400 hover:text-red-500 hover:border-red-200 bg-white rounded-xl text-xs transition-all flex items-center gap-1"
                       title="Remove from Wishlist"
                     >
-                      <IoMdClose className="text-base" />
+                      <CloseIcon className="text-base" />
                       <span>Remove</span>
                     </button>
                   </div>
@@ -129,6 +135,7 @@ const Favorites = () => {
         )}
       </div>
     </div>
+    </>
   )
 }
 

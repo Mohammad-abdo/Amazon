@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { SiMediamarkt } from 'react-icons/si'
 import FormattedPrice from './Products/FormattedPrice'
 import { useSelector } from 'react-redux'
 import { StateProps, storeProduct } from '../../type'
@@ -20,7 +19,7 @@ const CartPyment = () => {
   }, [productData])
 
   const handleCheckout = () => {
-    router.push('/Success')
+    router.push('/success')
   }
 
   return (
@@ -51,7 +50,7 @@ const CartPyment = () => {
       {userInfo ? (
         <button
           onClick={handleCheckout}
-          className="w-full h-11 bg-slate-900 text-white rounded-xl font-medium text-sm transition-all duration-300 hover:bg-indigo-600 active:scale-[0.98] shadow-sm hover:shadow-md"
+          className="w-full h-11 bg-slate-900 text-white rounded-xl font-medium text-sm transition-all duration-300 hover:bg-indigo-650 active:scale-[0.98] shadow-sm hover:shadow-md"
         >
           Proceed to Checkout
         </button>

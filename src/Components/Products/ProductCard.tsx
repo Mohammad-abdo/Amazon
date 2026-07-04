@@ -66,7 +66,7 @@ const ProductCard = ({
   const discountAmount = oldPrice - price
 
   return (
-    <div className="group relative bg-white border border-slate-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full">
+    <div className="group relative bg-white border border-slate-100/80 hover:border-indigo-150 rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-indigo-500/5 transition-all duration-500 flex flex-col h-full">
       {/* Product Image Panel */}
       <div className="relative w-full pt-[85%] bg-slate-50 overflow-hidden cursor-pointer">
         <Link href={`/product/${_id}`}>
@@ -139,7 +139,7 @@ const ProductCard = ({
 
           <button
             onClick={handleAddToCart}
-            className="w-full h-11 bg-slate-900 text-white rounded-xl font-medium text-sm transition-all duration-300 hover:bg-indigo-600 active:scale-[0.98] flex items-center justify-center gap-2 shadow-sm hover:shadow-md"
+            className="w-full h-11 bg-slate-900 text-white rounded-2xl font-medium text-sm transition-all duration-300 hover:bg-indigo-650 active:scale-[0.98] flex items-center justify-center gap-2 shadow-sm hover:shadow-md"
           >
             <HiShoppingCart className="text-base" />
             Add to Cart
