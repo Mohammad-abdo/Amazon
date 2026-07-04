@@ -1,6 +1,6 @@
-import React, { use, useEffect, useState } from 'react'
+import React from 'react'
 import { productProps } from '../../../type'
-import ProductCard from './ProductCard.jsx'
+import ProductCard from './ProductCard'
 
 
 const Products = ({productData}:any) => {

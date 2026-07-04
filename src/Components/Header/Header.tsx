@@ -1,105 +1,164 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
-import logo from '@/images/logo.png'
-import cart from '@/images/cart.png'
-  import {BiCaretDown} from 'react-icons/bi'
-  import {HiOutlineSearch} from 'react-icons/hi'
-  import {SlLocationPin} from 'react-icons/sl'
+import Logo from '@/Components/Logo'
+import cartIcon from '@/images/cart.png'
+import { BiCaretDown } from 'react-icons/bi'
+import { HiOutlineSearch as SearchIcon } from 'react-icons/hi'
+import { SlLocationPin } from 'react-icons/sl'
+import { FaHeart } from 'react-icons/fa'
 import Link from 'next/link'
 import { useDispatch, useSelector } from 'react-redux'
 import { StateProps } from '../../../type'
 import { useSession, signIn, signOut } from "next-auth/react"
-import { addUser } from '@/store/nextslice'
-
-
+import { addUser, removeUser } from '@/store/nextslice'
 
 const Header = () => {
-  const {productData,favoriteData,userInfo}=useSelector((state:StateProps)=>state.next)
-  const [cartlength,setCartlength]=  useState(0)
-  useEffect(()=>{
-    setCartlength( productData.length)
-  }, [productData.length])
+  const { productData, favoriteData, userInfo } = useSelector(
+    (state: StateProps) => state.next
+  )
+  const [cartlength, setCartlength] = useState(0)
   const dispatch = useDispatch()
-  const { data: session, } = useSession()
-useEffect(()=>{
-  if(session){
-   dispatch(addUser({
-    name:session.user?.name,
-    email:session.user?.email,
-    image:session.user?.image
-   }))
-  }
-},[session])
-  
-  return (
-    <div className=' bg-amazon_blue h-20 w-full text-lightText sticky top-0 z-50'>
-        <div className="h-full w-full mx-auto inline-flex items-center justify-between gap-1 mdl:gap-3 px-4 ">
-<Link href={'/'} className="px-2 py-2 border border-transparent hover:border-white cursor-pointer duration-300 flex items-center justify-center h-[70%]">
-<Image className='w-28 object-cover mt-1' src={logo} alt="Logo"/>
-</Link>
+  const { data: session } = useSession()
 
-{/* delever */}
-<div className="mx-2 px-2 py-2 border border-transparent hover:border-white cursor-pointer duration-300 
-hidden xl:inline-flex items-center justify-center h-[70%] gap-1">
-    <SlLocationPin/>
-  <div className='text-xs'>
-  <p>Delever to</p>
-    <p className='font-bold text-white uppercase'>USA</p>
-  </div>
-</div>
-{/* Search */}
-<div className='flex-1 hidden md:inline-flex h-10 items-center justify-between relative '>
-    <input type="text" placeholder="Search next_amazon_yt products"
-    className='w-full h-full rounded-md border-[3px] border-transparent outline-none focus-visible:border-amazon_yellow px-2 placeholder:text-sm text-base text-black' />
-    <span className="w-12 h-full bg-amazon_yellow text-black text-2xl flex items-center justify-center absolute right-0 rounded-tr-md rounded-mr-md cursor-pointer hover:bg-amazon_yellow_shadow duration-500 hover:text-white">
-        <HiOutlineSearch/>
-    </span>
-</div>
-{/* signin */}
- {
-  userInfo ? 
-  <div onClick={()=>signIn()} className='
-  px-2 text-xs text-gray-100 flex 
-   items-center border border-transparent
- hover:border-white cursor-pointer duration-300   gap-1  h-[70%]'>
-<img  src={userInfo.image} alt="user image "
+  useEffect(() => {
+    setCartlength(productData.length)
+  }, [productData.length])
 
-className=' object-cover w-8 h-8 rounded-full'
-/>
-<div className='text-xs text-gray-100 flex flex-col justify-between'>
-  <p className='text-[13px] text-white font-bold'> {userInfo.name.substring(0,15)} </p>
-  <p className='text-[10px]'> {userInfo.email} </p>
-</div>
-</div>:
-<div onClick={()=>signIn()} className='px-2 text-xs text-gray-100 flex  border border-transparent
- hover:border-white cursor-pointer duration-300  flex-col gap-1 justify-center h-[70%]'>
-    <p>Hello, sign in</p>
-    <p className='font-bold text-white flex items-center'>
-        Account & Lists{" "}
-        <span>
-            <BiCaretDown/>
-        </span>
-    </p>
-</div>
- }
-{/* Faforites */}
-<div className='px-2 text-xs text-gray-100 flex  border border-transparent
- hover:border-white cursor-pointer duration-300  flex-col gap-1 justify-center h-[70%] relative'>
-    <p>Marked</p>
-    <p className='font-bold text-white '>& Favorite</p>
-    {
-      favoriteData.length >0 && <span className=' absolute
-       right-2 top-2 w-4 h-4 border-[1px] border-gray-400 flex items-center justify-center text-xs text-amazon_yellow'> {favoriteData.length}</span>
+  useEffect(() => {
+    if (session) {
+      dispatch(
+        addUser({
+          name: session.user?.name,
+          email: session.user?.email,
+          image: session.user?.image,
+        })
+      )
+    } else {
+      dispatch(removeUser())
     }
-</div>
-{/* Cart */}
-<Link href={'/Cart'} className='px-2 flex items-center border border-transparent hover:border-white cursor-pointer duration-300 h-[70%] relative'>
-    <Image src={cart} alt={'CartIcons'} className='w-auto object-cover h-8 '/>
-    <p className='text-xs text-white font-bold mt-3'>Cart</p>
-    <span className=' absolute text-amazon_yellow text-xs top-2 left-[29px] font-semibold'> {cartlength ?cartlength :0}</span>
-</Link>
+  }, [session, dispatch])
+
+  return (
+    <header className="bg-slate-950/95 backdrop-blur-md border-b border-slate-800 text-slate-100 h-20 w-full sticky top-0 z-50 transition-all duration-300">
+      <div className="h-full max-w-screen-2xl mx-auto flex items-center justify-between gap-4 px-4 sm:px-6">
+        
+        {/* Brand Logo */}
+        <Link 
+          href="/" 
+          className="flex items-center justify-center py-1.5 px-2.5 rounded-xl border border-transparent hover:border-slate-800 hover:bg-slate-900/50 transition-all duration-300"
+        >
+          <Logo />
+        </Link>
+
+        {/* Location display - redesigned to look clean */}
+        <div className="hidden xl:flex items-center gap-2 py-1.5 px-2.5 rounded-xl border border-transparent hover:border-slate-800 hover:bg-slate-900/50 cursor-pointer transition-all duration-300">
+          <SlLocationPin className="text-indigo-400 text-lg" />
+          <div className="text-left">
+            <span className="text-[10px] text-slate-400 block uppercase tracking-wider font-semibold">Deliver to</span>
+            <span className="text-xs text-white block font-bold">Global Shipping</span>
+          </div>
         </div>
-    </div>
+
+        {/* Premium Search Bar */}
+        <div className="flex-1 max-w-xl hidden md:flex h-10 relative rounded-xl overflow-hidden border border-slate-700 bg-slate-900 focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500 transition-all duration-300">
+          <input 
+            type="text" 
+            placeholder="Search premium products..."
+            className="w-full h-full bg-transparent px-4 py-2 text-sm text-slate-100 placeholder:text-slate-500 outline-none border-none focus:outline-none" 
+          />
+          <button 
+            type="submit" 
+            className="w-12 h-full bg-indigo-600 hover:bg-indigo-500 text-white flex items-center justify-center cursor-pointer transition-colors duration-200"
+            title="Search"
+          >
+            <SearchIcon className="text-lg" />
+          </button>
+        </div>
+
+        {/* Right Nav Options */}
+        <div className="flex items-center gap-2 sm:gap-4">
+          
+          {/* User Signin/out */}
+          {userInfo ? (
+            <div 
+              onClick={() => signOut()} 
+              className="flex items-center gap-2.5 py-1.5 px-2.5 rounded-xl border border-transparent hover:border-slate-800 hover:bg-slate-900/50 cursor-pointer transition-all duration-300 group"
+              title="Sign Out"
+            >
+              {userInfo.image ? (
+                <img  
+                  src={userInfo.image} 
+                  alt={userInfo.name}
+                  className="object-cover w-8 h-8 rounded-full border border-slate-700 group-hover:border-indigo-400 transition-colors"
+                />
+              ) : (
+                <div className="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center text-sm font-bold text-white uppercase">
+                  {userInfo.name.charAt(0)}
+                </div>
+              )}
+              <div className="text-left hidden sm:block">
+                <span className="text-[10px] text-slate-400 block font-medium">Hello, Sign Out</span>
+                <span className="text-xs text-white block font-bold max-w-[90px] truncate">{userInfo.name}</span>
+              </div>
+            </div>
+          ) : (
+            <div 
+              onClick={() => signIn()} 
+              className="flex flex-col py-1.5 px-3 rounded-xl border border-transparent hover:border-slate-800 hover:bg-slate-900/50 cursor-pointer transition-all duration-300"
+              title="Sign In"
+            >
+              <span className="text-[10px] text-slate-400 font-medium">Hello, Guest</span>
+              <span className="text-xs text-white font-bold flex items-center gap-0.5">
+                Sign In <BiCaretDown className="text-slate-400" />
+              </span>
+            </div>
+          )}
+
+          {/* Favorites Wishlist Link */}
+          <Link 
+            href="/Favorites" 
+            className="relative flex items-center gap-1.5 py-1.5 px-3 rounded-xl border border-transparent hover:border-slate-800 hover:bg-slate-900/50 cursor-pointer transition-all duration-300"
+            title="Wishlist"
+          >
+            <FaHeart className="text-indigo-400 text-base" />
+            <div className="text-left hidden sm:block">
+              <span className="text-[10px] text-slate-400 block font-medium">Favorites</span>
+              <span className="text-xs text-white block font-bold">Wishlist</span>
+            </div>
+            {favoriteData.length > 0 && (
+              <span className="absolute -top-1 -right-1 bg-indigo-600 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center shadow-sm">
+                {favoriteData.length}
+              </span>
+            )}
+          </Link>
+
+          {/* Shopping Cart Link */}
+          <Link 
+            href="/Cart" 
+            className="relative flex items-center gap-2 py-1.5 px-3 rounded-xl border border-transparent hover:border-slate-850 hover:bg-slate-900/50 bg-slate-900/30 border-slate-800 cursor-pointer transition-all duration-300"
+            title="Shopping Cart"
+          >
+            <Image 
+              src={cartIcon} 
+              alt="Cart Icon" 
+              className="w-5 h-5 object-contain filter invert opacity-90"
+            />
+            <div className="text-left hidden sm:block">
+              <span className="text-[10px] text-slate-400 block font-medium">Cart</span>
+              <span className="text-xs text-white block font-bold">
+                {cartlength > 0 ? `${cartlength} items` : 'Empty'}
+              </span>
+            </div>
+            {cartlength > 0 && (
+              <span className="absolute -top-1.5 -right-1.5 bg-indigo-600 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-md animate-pulse">
+                {cartlength}
+              </span>
+            )}
+          </Link>
+
+        </div>
+      </div>
+    </header>
   )
 }
 

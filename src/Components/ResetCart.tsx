@@ -15,9 +15,12 @@ const ResetCart = () => {
     }
   return (
     <div className=''>
-        <button onClick={handelResetCart} className="w-44 h-10 font-semibold bg-gray-200
-         hover:bg-red-600 shadow-lg shadow-amazon_yellow rounded-lg hover:text-white duration-300"> Reset Cart</button>
-      
+      <button 
+        onClick={handelResetCart} 
+        className="px-6 h-10 font-semibold text-slate-500 hover:text-red-500 hover:bg-red-50/50 border border-slate-250 hover:border-red-200 rounded-xl transition-all duration-300 text-xs sm:text-sm"
+      > 
+        Reset Cart
+      </button>
     </div>
   )
 }

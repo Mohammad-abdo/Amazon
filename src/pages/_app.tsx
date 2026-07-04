@@ -14,7 +14,7 @@ import { SessionProvider } from "next-auth/react"
 
       <PersistGate persistor={persistor} loading={null}>
     <SessionProvider session={session}>
-          <div className='font-bodyFont bg-gray-300'>
+          <div className='font-bodyFont bg-slate-50 min-h-screen flex flex-col justify-between'>
                <RootLayout>
    <Component {...pageProps} />
    </RootLayout>
