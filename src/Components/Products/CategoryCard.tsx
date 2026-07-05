@@ -7,9 +7,9 @@ const CategoryCard = ({ name, slug, image }: Category) => {
   return (
     <Link
       href={`/category/${slug}`}
-      className="group relative bg-white border border-slate-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col"
+      className="group relative bg-white border border-cream rounded-3xl overflow-hidden shadow-soft hover:shadow-card transition-all duration-500 flex flex-col"
     >
-      <div className="relative w-full pt-[70%] bg-slate-50 overflow-hidden">
+      <div className="relative w-full pt-[70%] bg-cream/40 overflow-hidden">
         <ProductImage
           src={image}
           alt={name}
@@ -19,7 +19,7 @@ const CategoryCard = ({ name, slug, image }: Category) => {
         />
       </div>
       <div className="p-4 text-center">
-        <h3 className="font-semibold text-slate-800 text-base group-hover:text-indigo-600 transition-colors">
+        <h3 className="font-semibold text-brand-950 text-base group-hover:text-brand-600 transition-colors">
           {name}
         </h3>
       </div>

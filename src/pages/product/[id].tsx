@@ -28,7 +28,7 @@ const renderStars = (ratingVal: number) => {
     } else if (i === floor + 1 && ratingVal % 1 >= 0.3) {
       stars.push(<FaStarHalfAlt key={i} className="text-amber-400" />)
     } else {
-      stars.push(<FaRegStar key={i} className="text-slate-300" />)
+      stars.push(<FaRegStar key={i} className="text-neutral-400" />)
     }
   }
   return stars
@@ -42,9 +42,9 @@ const ProductDetail = ({ product, relatedProducts }: ProductPageProps) => {
   const [reviewForm, setReviewForm] = useState({ author: '', rating: 5, comment: '' })
 
   if (!product) return (
-    <div className="min-h-[60vh] flex flex-col items-center justify-center bg-slate-50">
-      <h2 className="text-xl font-semibold text-slate-700">Product not found</h2>
-      <Link href="/" className="mt-4 text-indigo-600 hover:underline">Back to shopping</Link>
+    <div className="min-h-[60vh] flex flex-col items-center justify-center bg-surface">
+      <h2 className="text-xl font-semibold text-brand-900">Product not found</h2>
+      <Link href="/" className="mt-4 text-brand-600 hover:underline">Back to shopping</Link>
     </div>
   )
 
@@ -83,29 +83,29 @@ const ProductDetail = ({ product, relatedProducts }: ProductPageProps) => {
   }
 
   return (
-    <div className="bg-slate-50 min-h-screen py-8 px-4 sm:px-6">
+    <div className="bg-surface min-h-screen py-8 px-4 sm:px-6">
       <div className="max-w-6xl mx-auto">
         {/* Navigation Breadcrumb & Back button */}
         <div className="flex items-center justify-between mb-8">
           <Link
             href="/"
-            className="flex items-center gap-1.5 text-xs md:text-sm font-semibold text-slate-500 hover:text-slate-800 transition-colors"
+            className="flex items-center gap-1.5 text-xs md:text-sm font-semibold text-neutral-500 hover:text-brand-950 transition-colors"
           >
             <IoMdArrowBack className="text-base" />
             <span>Back to Products</span>
           </Link>
-          <div className="text-xs text-slate-400 font-medium">
+          <div className="text-xs text-neutral-500 font-medium">
             <Link href="/" className="hover:underline">Home</Link>
             <span className="mx-2">&gt;</span>
-            <Link href={`/category/${product.categorySlug}`} className="hover:underline text-slate-500">{product.category}</Link>
+            <Link href={`/category/${product.categorySlug}`} className="hover:underline text-neutral-500">{product.category}</Link>
           </div>
         </div>
 
         {/* Dynamic Showcase Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 bg-white border border-slate-100 p-6 md:p-10 rounded-3xl shadow-sm">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 bg-white border border-cream p-6 md:p-10 rounded-3xl shadow-soft">
 
           {/* Left Column: Product Image Media */}
-          <div className="relative bg-slate-50 border border-slate-100 rounded-2xl flex items-center justify-center p-8 aspect-square overflow-hidden group">
+          <div className="relative bg-cream/40 border border-cream rounded-2xl flex items-center justify-center p-8 aspect-square overflow-hidden group">
             <ProductImage
               src={product.image}
               alt={product.title}
@@ -115,7 +115,7 @@ const ProductDetail = ({ product, relatedProducts }: ProductPageProps) => {
               className="object-contain p-8 transform group-hover:scale-105 transition-transform duration-500"
             />
             {percentSaved > 0 && (
-              <span className="absolute top-4 left-4 bg-red-500 text-white text-[11px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm animate-pulse">
+              <span className="absolute top-4 left-4 bg-red-500 text-white text-[11px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider shadow-soft animate-pulse">
                 {percentSaved}% OFF
               </span>
             )}
@@ -125,10 +125,10 @@ const ProductDetail = ({ product, relatedProducts }: ProductPageProps) => {
           <div className="flex flex-col justify-between">
             <div>
               {/* Category & Title */}
-              <span className="text-xs text-indigo-650 font-bold uppercase tracking-widest block mb-1">
+              <span className="text-xs text-brand-700 font-bold uppercase tracking-widest block mb-1">
                 {product.category}
               </span>
-              <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 leading-tight mb-2">
+              <h1 className="text-2xl md:text-3xl font-extrabold text-brand-950 leading-tight mb-2">
                 {product.title}
               </h1>
 
@@ -136,7 +136,7 @@ const ProductDetail = ({ product, relatedProducts }: ProductPageProps) => {
                 {/* Rating display */}
                 <div className="flex items-center gap-1.5 text-xs font-semibold">
                   <div className="flex items-center">{renderStars(rating)}</div>
-                  <span className="text-slate-500">
+                  <span className="text-neutral-500">
                     {productReviews.length > 0
                       ? `${rating.toFixed(1)} (${productReviews.length} review${productReviews.length === 1 ? '' : 's'})`
                       : 'No reviews yet'}
@@ -144,16 +144,16 @@ const ProductDetail = ({ product, relatedProducts }: ProductPageProps) => {
                 </div>
               </div>
 
-              <hr className="border-slate-100 my-4" />
+              <hr className="border-cream my-4" />
 
               {/* Price block */}
               <div className="mb-5">
                 <div className="flex items-baseline gap-3">
-                  <span className="text-3xl font-extrabold text-slate-900">
+                  <span className="text-3xl font-extrabold text-brand-950">
                     <FormattedPrice amount={product.price} />
                   </span>
                   {product.oldPrice > product.price && (
-                    <span className="text-base text-slate-400 line-through">
+                    <span className="text-base text-neutral-500 line-through">
                       <FormattedPrice amount={product.oldPrice} />
                     </span>
                   )}
@@ -167,24 +167,24 @@ const ProductDetail = ({ product, relatedProducts }: ProductPageProps) => {
 
               {/* Description */}
               <div className="mb-6">
-                <h3 className="text-sm font-bold text-slate-800 mb-2">Overview</h3>
-                <p className="text-xs md:text-sm text-slate-500 leading-relaxed text-justify">
+                <h3 className="text-sm font-bold text-brand-950 mb-2">Overview</h3>
+                <p className="text-xs md:text-sm text-neutral-500 leading-relaxed text-justify">
                   {product.description}
                 </p>
               </div>
 
               {/* Service Badges */}
-              <div className="grid grid-cols-2 gap-3 bg-slate-50/50 border border-slate-100 rounded-xl p-4 mb-6">
+              <div className="grid grid-cols-2 gap-3 bg-cream/40 border border-cream rounded-xl p-4 mb-6">
                 <div className="flex items-center gap-2">
-                  <MdOutlineLocalShipping className="text-indigo-600 text-lg" />
-                  <div className="text-[11px] text-slate-600">
+                  <MdOutlineLocalShipping className="text-brand-600 text-lg" />
+                  <div className="text-[11px] text-neutral-600">
                     <span className="font-bold block">Free Shipping</span>
                     <span>For members/orders</span>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <MdVerifiedUser className="text-indigo-600 text-lg" />
-                  <div className="text-[11px] text-slate-600">
+                  <MdVerifiedUser className="text-brand-600 text-lg" />
+                  <div className="text-[11px] text-neutral-600">
                     <span className="font-bold block">1-Year Warranty</span>
                     <span>100% Genuine product</span>
                   </div>
@@ -193,10 +193,10 @@ const ProductDetail = ({ product, relatedProducts }: ProductPageProps) => {
             </div>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-slate-100">
+            <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-cream">
               <button
                 onClick={handleAddToCart}
-                className="flex-1 h-12 bg-slate-900 text-white rounded-xl font-semibold text-sm transition-all duration-300 hover:bg-indigo-600 active:scale-[0.98] flex items-center justify-center gap-2 shadow-sm hover:shadow-md"
+                className="flex-1 h-12 bg-brand-600 text-white rounded-xl font-semibold text-sm transition-all duration-300 hover:bg-brand-500 active:scale-[0.98] flex items-center justify-center gap-2 shadow-soft hover:shadow-md"
               >
                 <HiShoppingCart className="text-lg" />
                 Add to Shopping Cart
@@ -207,7 +207,7 @@ const ProductDetail = ({ product, relatedProducts }: ProductPageProps) => {
                 className={`h-12 px-6 border rounded-xl flex items-center justify-center transition-all duration-300 font-semibold text-sm ${
                   isFavorited
                     ? 'border-red-200 bg-red-50 text-red-500 hover:bg-red-100/55'
-                    : 'border-slate-200 bg-white text-slate-500 hover:text-red-500 hover:border-red-200'
+                    : 'border-cream bg-white text-neutral-500 hover:text-red-500 hover:border-red-200'
                 }`}
                 title="Save to Favorites"
               >
@@ -221,39 +221,39 @@ const ProductDetail = ({ product, relatedProducts }: ProductPageProps) => {
         </div>
 
         {/* Reviews */}
-        <div className="mt-10 bg-white border border-slate-100 rounded-3xl p-6 md:p-10 shadow-sm">
-          <h2 className="text-xl font-bold text-slate-900 mb-6">Customer Reviews</h2>
+        <div className="mt-10 bg-white border border-cream rounded-3xl p-6 md:p-10 shadow-soft">
+          <h2 className="text-xl font-bold text-brand-950 mb-6">Customer Reviews</h2>
 
           {productReviews.length > 0 ? (
             <div className="flex flex-col gap-4 mb-8">
               {productReviews.map((review) => (
-                <div key={review.id} className="border border-slate-100 rounded-2xl p-4">
+                <div key={review.id} className="border border-cream rounded-2xl p-4">
                   <div className="flex items-center justify-between mb-1">
-                    <span className="font-semibold text-sm text-slate-800">{review.author}</span>
+                    <span className="font-semibold text-sm text-brand-950">{review.author}</span>
                     <div className="flex items-center">{renderStars(review.rating)}</div>
                   </div>
-                  <p className="text-xs text-slate-500 leading-relaxed">{review.comment}</p>
+                  <p className="text-xs text-neutral-500 leading-relaxed">{review.comment}</p>
                 </div>
               ))}
             </div>
           ) : (
-            <p className="text-sm text-slate-400 mb-8">Be the first to review this product.</p>
+            <p className="text-sm text-neutral-500 mb-8">Be the first to review this product.</p>
           )}
 
-          <form onSubmit={handleSubmitReview} className="border-t border-slate-100 pt-6 flex flex-col gap-3 max-w-lg">
-            <h3 className="text-sm font-bold text-slate-800">Write a review</h3>
+          <form onSubmit={handleSubmitReview} className="border-t border-cream pt-6 flex flex-col gap-3 max-w-lg">
+            <h3 className="text-sm font-bold text-brand-950">Write a review</h3>
             <input
               type="text"
               placeholder="Your name"
               value={reviewForm.author}
               onChange={(e) => setReviewForm((f) => ({ ...f, author: e.target.value }))}
-              className="h-10 px-3 rounded-lg border border-slate-200 text-sm outline-none focus:border-indigo-500"
+              className="h-10 px-3 rounded-lg border border-cream text-sm outline-none focus:border-brand-500"
               required
             />
             <select
               value={reviewForm.rating}
               onChange={(e) => setReviewForm((f) => ({ ...f, rating: Number(e.target.value) }))}
-              className="h-10 px-3 rounded-lg border border-slate-200 text-sm outline-none focus:border-indigo-500"
+              className="h-10 px-3 rounded-lg border border-cream text-sm outline-none focus:border-brand-500"
             >
               {[5, 4, 3, 2, 1].map((r) => (
                 <option key={r} value={r}>{r} star{r === 1 ? '' : 's'}</option>
@@ -263,12 +263,12 @@ const ProductDetail = ({ product, relatedProducts }: ProductPageProps) => {
               placeholder="Share your experience with this product"
               value={reviewForm.comment}
               onChange={(e) => setReviewForm((f) => ({ ...f, comment: e.target.value }))}
-              className="px-3 py-2 rounded-lg border border-slate-200 text-sm outline-none focus:border-indigo-500 resize-none h-24"
+              className="px-3 py-2 rounded-lg border border-cream text-sm outline-none focus:border-brand-500 resize-none h-24"
               required
             />
             <button
               type="submit"
-              className="h-10 px-6 bg-slate-900 text-white rounded-xl font-semibold text-sm hover:bg-indigo-600 transition-colors self-start"
+              className="h-10 px-6 bg-brand-600 text-white rounded-xl font-semibold text-sm hover:bg-brand-500 transition-colors self-start"
             >
               Submit Review
             </button>
@@ -278,7 +278,7 @@ const ProductDetail = ({ product, relatedProducts }: ProductPageProps) => {
         {/* Related Products */}
         {relatedProducts.length > 0 && (
           <div className="mt-10">
-            <h2 className="text-xl font-bold text-slate-900 mb-6">You might also like</h2>
+            <h2 className="text-xl font-bold text-brand-950 mb-6">You might also like</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
               {relatedProducts.map((rp) => (
                 <ProductCard key={rp._id} {...rp} />

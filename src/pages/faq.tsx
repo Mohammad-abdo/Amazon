@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 const faqs = [
   {
@@ -24,20 +25,22 @@ const faqs = [
 ]
 
 const Faq = () => {
+  const { t } = useLanguage()
+
   return (
     <>
       <Head>
-        <title>FAQ - Nexis Premium E-Commerce</title>
-        <meta name="description" content="Frequently asked questions about shopping at Nexis." />
+        <title>FAQ - Souqi</title>
+        <meta name="description" content="Frequently asked questions about shopping at Souqi." />
       </Head>
-      <div className="max-w-screen-2xl mx-auto py-12 px-4 sm:px-6 min-h-[70vh] bg-slate-50">
+      <div className="max-w-screen-2xl mx-auto py-12 px-4 sm:px-6 min-h-[70vh] bg-surface">
         <div className="max-w-2xl mx-auto">
-          <h1 className="text-2xl font-bold text-slate-800 mb-6">Frequently Asked Questions</h1>
+          <h1 className="text-2xl font-bold text-brand-950 mb-6">{t('faq.title')}</h1>
           <div className="flex flex-col gap-4">
             {faqs.map((item) => (
-              <div key={item.q} className="bg-white border border-slate-100 rounded-2xl p-5 shadow-sm">
-                <h3 className="text-sm font-bold text-slate-800 mb-1.5">{item.q}</h3>
-                <p className="text-xs text-slate-500 leading-relaxed">{item.a}</p>
+              <div key={item.q} className="bg-white border border-cream rounded-2xl p-5 shadow-soft">
+                <h3 className="text-sm font-bold text-brand-950 mb-1.5">{item.q}</h3>
+                <p className="text-xs text-neutral-500 leading-relaxed">{item.a}</p>
               </div>
             ))}
           </div>

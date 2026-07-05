@@ -9,6 +9,7 @@ import { addOrder } from '@/store/ordersSlice'
 import StepIndicator from '@/Components/Checkout/StepIndicator'
 import AddressForm from '@/Components/Checkout/AddressForm'
 import OrderReview from '@/Components/Checkout/OrderReview'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 const emptyAddress: Address = {
   name: '', line1: '', line2: '', city: '', state: '', zip: '', country: '', phone: '',
@@ -18,6 +19,7 @@ const Checkout = () => {
   const { productData, userInfo } = useSelector((state: StateProps) => state.next)
   const dispatch = useDispatch()
   const router = useRouter()
+  const { t } = useLanguage()
 
   const [step, setStep] = useState<'address' | 'review'>('address')
   const [address, setAddress] = useState<Address>(emptyAddress)
@@ -33,9 +35,9 @@ const Checkout = () => {
 
   if (!userInfo) {
     return (
-      <div className="min-h-[60vh] flex flex-col items-center justify-center bg-slate-50 gap-3">
-        <h2 className="text-xl font-semibold text-slate-700">Please sign in to check out</h2>
-        <Link href="/cart" className="text-indigo-600 hover:underline text-sm">Back to cart</Link>
+      <div className="min-h-[60vh] flex flex-col items-center justify-center bg-surface gap-3">
+        <h2 className="text-xl font-semibold text-brand-900">{t('checkout.signInToCheckout')}</h2>
+        <Link href="/cart" className="text-brand-600 hover:underline text-sm">{t('checkout.backToCart')}</Link>
       </div>
     )
   }
@@ -45,7 +47,7 @@ const Checkout = () => {
   const handlePlaceOrder = () => {
     setPlacing(true)
     const order = {
-      id: `NXS-${Date.now()}`,
+      id: `SOQ-${Date.now()}`,
       items: productData,
       address,
       subtotal: total,
@@ -61,11 +63,11 @@ const Checkout = () => {
   return (
     <>
       <Head>
-        <title>Checkout - Nexis Premium E-Commerce</title>
+        <title>Checkout - Souqi</title>
       </Head>
-      <div className="max-w-screen-2xl mx-auto py-8 px-4 sm:px-6 min-h-[70vh] bg-slate-50">
-        <div className="max-w-3xl mx-auto bg-white border border-slate-100 rounded-2xl p-6 md:p-10 shadow-sm">
-          <h1 className="text-2xl font-bold text-slate-800 mb-6">Checkout</h1>
+      <div className="max-w-screen-2xl mx-auto py-8 px-4 sm:px-6 min-h-[70vh] bg-surface">
+        <div className="max-w-3xl mx-auto bg-white border border-cream rounded-2xl p-6 md:p-10 shadow-soft">
+          <h1 className="text-2xl font-bold text-brand-950 mb-6">{t('checkout.title')}</h1>
           <StepIndicator step={step} />
 
           {step === 'address' ? (

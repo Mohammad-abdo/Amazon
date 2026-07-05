@@ -3,20 +3,23 @@ import { GetStaticProps } from 'next'
 import { Category } from '../../../type'
 import { getCategories } from '@/lib/api'
 import CategoryCard from '@/Components/Products/CategoryCard'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 interface props {
   categories: Category[]
 }
 
 const Categories = ({ categories }: props) => {
+  const { t } = useLanguage()
+
   return (
     <>
       <Head>
-        <title>Shop by Category - Nexis Premium E-Commerce</title>
-        <meta name="description" content="Browse the full Nexis catalog by category." />
+        <title>Shop by Category - Souqi</title>
+        <meta name="description" content="Browse the full Souqi catalog by category." />
       </Head>
-      <div className="max-w-screen-2xl mx-auto py-8 px-4 sm:px-6 min-h-[70vh] bg-slate-50">
-        <h1 className="text-2xl font-bold text-slate-800 mb-6">Shop by Category</h1>
+      <div className="max-w-screen-2xl mx-auto py-8 px-4 sm:px-6 min-h-[70vh] bg-surface">
+        <h1 className="text-2xl font-bold text-brand-950 mb-6">{t('shop.shopByCategory')}</h1>
         {categories.length > 0 ? (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-6">
             {categories.map((cat) => (
@@ -24,7 +27,7 @@ const Categories = ({ categories }: props) => {
             ))}
           </div>
         ) : (
-          <p className="text-sm text-slate-400">No categories available right now.</p>
+          <p className="text-sm text-neutral-400">{t('shop.noCategories')}</p>
         )}
       </div>
     </>

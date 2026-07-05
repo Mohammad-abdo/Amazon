@@ -1,72 +1,62 @@
 import React from 'react'
 import Link from 'next/link'
-import {LuMenu} from 'react-icons/lu'
+import { LuMenu } from 'react-icons/lu'
 import { useDispatch, useSelector } from 'react-redux'
-import {  signOut } from "next-auth/react"
+import { signOut } from 'next-auth/react'
 import { StateProps } from '../../../type'
 import { removeUser } from '@/store/nextslice'
-const links=[
-    {
-        id:1,
-        title:'Categories',
-        path:"/categories"
-    },
-    {
-        id:2,
-        title:'Customer Service',
-        path:"/contact"
-    },
-    {
-        id:3,
-        title:'FAQ',
-        path:"/faq"
-    },
-    {
-        id:4,
-        title:'About Us',
-        path:"/about"
-    },
+import { useLanguage, TranslationKey } from '@/contexts/LanguageContext'
 
+const links: { id: number; key: TranslationKey; path: string }[] = [
+  { id: 1, key: 'bottomHeader.categories', path: '/categories' },
+  { id: 2, key: 'bottomHeader.deals', path: '/deals' },
+  { id: 3, key: 'bottomHeader.brands', path: '/brands' },
+  { id: 4, key: 'bottomHeader.magazine', path: '/magazine' },
+  { id: 5, key: 'bottomHeader.giftCards', path: '/gift-cards' },
+  { id: 6, key: 'bottomHeader.trackOrder', path: '/track-order' },
+  { id: 7, key: 'bottomHeader.shipping', path: '/shipping' },
+  { id: 8, key: 'bottomHeader.faq', path: '/faq' },
 ]
+
 const BottomHeader = () => {
-  const {userInfo}=useSelector((state:StateProps)=>state.next)
-  const dispatch =useDispatch()
-const handelSignOut=()=>{
-signOut()
-dispatch(removeUser())
-}
+  const { userInfo } = useSelector((state: StateProps) => state.next)
+  const dispatch = useDispatch()
+  const { t } = useLanguage()
+
+  const handelSignOut = () => {
+    signOut()
+    dispatch(removeUser())
+  }
+
   return (
-   
-    <div className='bg-slate-900 text-slate-300 border-b border-slate-800 h-10 w-full text-xs sm:text-sm flex items-center px-4 justify-between'>
+    <div className="bg-brand-600 text-white h-10 w-full text-xs sm:text-sm flex items-center px-4 justify-between">
       <div className="flex items-center gap-1 sm:gap-2">
-        <Link href="/categories" className='flex items-center gap-1 h-8 cursor-pointer hover:bg-slate-800 hover:text-white px-3.5 rounded-lg transition-all duration-200 font-medium'>
-          <LuMenu className='text-lg'/> All Categories
+        <Link
+          href="/categories"
+          className="flex items-center gap-1.5 h-8 cursor-pointer hover:bg-brand-700 px-3.5 rounded-lg transition-all duration-200 font-semibold"
+        >
+          <LuMenu className="text-lg" /> {t('bottomHeader.allCategories')}
         </Link>
-        {
-          links.map((link)=>(
-            <Link
-              href={link.path}
-              key={link.id}
-              className="hover:bg-slate-800 hover:text-white hidden md:inline-flex items-center h-8 cursor-pointer px-3.5 rounded-lg transition-all duration-200 font-medium"
-            >
-              {link.title}
-            </Link>
-          ))
-        }
-      </div>
-      
-      {
-        userInfo && (
-          <button
-            onClick={handelSignOut}
-            className="hover:bg-red-950/30 hover:text-red-400 text-red-500 duration-200 md:inline-flex items-center h-8 cursor-pointer px-3.5 rounded-lg transition-all font-semibold text-xs uppercase tracking-wider"
+        {links.map((link) => (
+          <Link
+            href={link.path}
+            key={link.id}
+            className="hover:bg-brand-700 hidden md:inline-flex items-center h-8 cursor-pointer px-3.5 rounded-lg transition-all duration-200 font-medium text-brand-50"
           >
-            Sign Out
-          </button>
-        )
-      }
+            {t(link.key)}
+          </Link>
+        ))}
+      </div>
+
+      {userInfo && (
+        <button
+          onClick={handelSignOut}
+          className="hover:bg-brand-700 text-brand-100 hover:text-white duration-200 md:inline-flex items-center h-8 cursor-pointer px-3.5 rounded-lg transition-all font-semibold text-xs uppercase tracking-wider"
+        >
+          {t('bottomHeader.signOut')}
+        </button>
+      )}
     </div>
-      
   )
 }
 

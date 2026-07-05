@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import Head from 'next/head'
 import { MdEmail } from 'react-icons/md'
+import { useLanguage } from '@/contexts/LanguageContext'
 
-const CONTACT_EMAIL = 'support@nexis-shop.example'
+const CONTACT_EMAIL = 'support@souqi.example'
 
 const Contact = () => {
+  const { t } = useLanguage()
   const [form, setForm] = useState({ name: '', email: '', message: '' })
   const [submitted, setSubmitted] = useState(false)
 
@@ -14,20 +16,20 @@ const Contact = () => {
     setSubmitted(true)
   }
 
-  const inputClass = 'h-11 px-3 rounded-lg border border-slate-200 text-sm outline-none focus:border-indigo-500 w-full'
+  const inputClass = 'h-11 px-3 rounded-lg border border-cream text-sm outline-none focus:border-brand-500 w-full'
 
   return (
     <>
       <Head>
-        <title>Contact Us - Nexis Premium E-Commerce</title>
-        <meta name="description" content="Get in touch with the Nexis team." />
+        <title>Contact Us - Souqi</title>
+        <meta name="description" content="Get in touch with the Souqi team." />
       </Head>
-      <div className="max-w-screen-2xl mx-auto py-12 px-4 sm:px-6 min-h-[70vh] bg-slate-50">
-        <div className="max-w-lg mx-auto bg-white border border-slate-100 rounded-2xl p-8 shadow-sm">
-          <h1 className="text-2xl font-bold text-slate-800 mb-2">Contact Us</h1>
-          <p className="text-sm text-slate-500 mb-6">
+      <div className="max-w-screen-2xl mx-auto py-12 px-4 sm:px-6 min-h-[70vh] bg-surface">
+        <div className="max-w-lg mx-auto bg-white border border-cream rounded-2xl p-8 shadow-soft">
+          <h1 className="text-2xl font-bold text-brand-950 mb-2">{t('contact.title')}</h1>
+          <p className="text-sm text-neutral-500 mb-6">
             Have a question? Reach us directly at{' '}
-            <a href={`mailto:${CONTACT_EMAIL}`} className="text-indigo-600 hover:underline inline-flex items-center gap-1">
+            <a href={`mailto:${CONTACT_EMAIL}`} className="text-brand-600 hover:underline inline-flex items-center gap-1">
               <MdEmail className="inline" /> {CONTACT_EMAIL}
             </a>{' '}
             or send a message below.
@@ -41,7 +43,7 @@ const Contact = () => {
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
               <input
                 required
-                placeholder="Your name"
+                placeholder={t('contact.namePlaceholder')}
                 value={form.name}
                 onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
                 className={inputClass}
@@ -49,23 +51,23 @@ const Contact = () => {
               <input
                 required
                 type="email"
-                placeholder="Your email"
+                placeholder={t('contact.emailPlaceholder')}
                 value={form.email}
                 onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
                 className={inputClass}
               />
               <textarea
                 required
-                placeholder="Your message"
+                placeholder={t('contact.messagePlaceholder')}
                 value={form.message}
                 onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
-                className="px-3 py-2 rounded-lg border border-slate-200 text-sm outline-none focus:border-indigo-500 resize-none h-32"
+                className="px-3 py-2 rounded-lg border border-cream text-sm outline-none focus:border-brand-500 resize-none h-32"
               />
               <button
                 type="submit"
-                className="h-11 bg-slate-900 text-white rounded-xl font-semibold text-sm hover:bg-indigo-600 transition-colors self-start px-8"
+                className="h-11 bg-brand-600 text-white rounded-xl font-semibold text-sm hover:bg-brand-500 transition-colors self-start px-8"
               >
-                Send Message
+                {t('contact.send')}
               </button>
             </form>
           )}

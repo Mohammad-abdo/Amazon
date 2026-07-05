@@ -1,73 +1,157 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { Category, productProps } from '../../../type'
 import { getCategories, getProductsByCategoryId } from '@/lib/api'
 import Products from '@/Components/Products/Products'
+import ProductListItem from '@/Components/Products/ProductListItem'
+import ProductImage from '@/Components/Products/ProductImage'
+import CategoryFilterSidebar from '@/Components/Shop/CategoryFilterSidebar'
+import SortAndViewBar, { SortOption, ViewMode } from '@/Components/Shop/SortAndViewBar'
+import Pagination from '@/Components/Shop/Pagination'
+import { useLanguage } from '@/contexts/LanguageContext'
 import { IoMdArrowBack } from 'react-icons/io'
 
 const PAGE_SIZE = 12
 
 interface props {
   category: Category
+  categories: Category[]
   productData: productProps[]
 }
 
-const CategoryPage = ({ category, productData }: props) => {
+const CategoryPage = ({ category, categories, productData }: props) => {
+  const { t } = useLanguage()
   const [products, setProducts] = useState(productData)
-  const [offset, setOffset] = useState(productData.length)
-  const [loadingMore, setLoadingMore] = useState(false)
-  const [hasMore, setHasMore] = useState(productData.length === PAGE_SIZE)
+  const [page, setPage] = useState(1)
+  const [maxKnownPage, setMaxKnownPage] = useState(1)
+  const [hasNextPage, setHasNextPage] = useState(productData.length === PAGE_SIZE)
+  const [loading, setLoading] = useState(false)
+  const [priceRange, setPriceRange] = useState({ min: '', max: '' })
+  const [sort, setSort] = useState<SortOption>('default')
+  const [view, setView] = useState<ViewMode>('grid')
 
-  const handleLoadMore = async () => {
-    setLoadingMore(true)
+  const loadPage = async (pageNum: number, min: string, max: string) => {
+    setLoading(true)
     try {
-      const more = await getProductsByCategoryId(category.id, { offset, limit: PAGE_SIZE })
-      setProducts((prev) => [...prev, ...more])
-      setOffset((prev) => prev + more.length)
-      setHasMore(more.length === PAGE_SIZE)
+      const results = await getProductsByCategoryId(category.id, {
+        offset: (pageNum - 1) * PAGE_SIZE,
+        limit: PAGE_SIZE,
+        priceMin: min ? Number(min) : undefined,
+        priceMax: max ? Number(max) : undefined,
+      })
+      setProducts(results)
+      setPage(pageNum)
+      setMaxKnownPage((prev) => Math.max(prev, pageNum))
+      setHasNextPage(results.length === PAGE_SIZE)
     } catch (error) {
-      console.error('Error loading more products:', error)
-      setHasMore(false)
+      console.error('Error loading category products:', error)
+      setHasNextPage(false)
     } finally {
-      setLoadingMore(false)
+      setLoading(false)
     }
   }
+
+  const handleApplyPrice = (min: string, max: string) => {
+    setPriceRange({ min, max })
+    setMaxKnownPage(1)
+    loadPage(1, min, max)
+  }
+
+  const handlePageChange = (pageNum: number) => {
+    if (pageNum < 1) return
+    loadPage(pageNum, priceRange.min, priceRange.max)
+  }
+
+  const sortedProducts = useMemo(() => {
+    const list = [...products]
+    switch (sort) {
+      case 'price-asc':
+        return list.sort((a, b) => a.price - b.price)
+      case 'price-desc':
+        return list.sort((a, b) => b.price - a.price)
+      case 'newest':
+        return list.sort((a, b) => Number(b.isNew) - Number(a.isNew))
+      default:
+        return list
+    }
+  }, [products, sort])
 
   return (
     <>
       <Head>
-        <title>{category.name} - Nexis Premium E-Commerce</title>
-        <meta name="description" content={`Shop ${category.name} at Nexis.`} />
+        <title>{category.name} - Souqi</title>
+        <meta name="description" content={`Shop ${category.name} at Souqi.`} />
       </Head>
-      <div className="max-w-screen-2xl mx-auto py-8 px-4 sm:px-6 min-h-[70vh] bg-slate-50">
+      <div className="max-w-screen-2xl mx-auto py-8 px-4 sm:px-6 min-h-[70vh] bg-surface">
         <div className="flex items-center justify-between mb-6">
-          <Link href="/categories" className="flex items-center gap-1.5 text-xs md:text-sm font-semibold text-slate-500 hover:text-slate-800 transition-colors">
+          <Link href="/categories" className="flex items-center gap-1.5 text-xs md:text-sm font-semibold text-neutral-500 hover:text-brand-950 transition-colors">
             <IoMdArrowBack className="text-base" />
-            <span>All Categories</span>
+            <span>{t('shop.allCategories')}</span>
           </Link>
-          <h1 className="text-2xl font-bold text-slate-800">{category.name}</h1>
+          <h1 className="text-2xl font-bold text-brand-950">{category.name}</h1>
         </div>
 
-        {products.length > 0 ? (
-          <>
-            <Products productData={products} />
-            {hasMore && (
-              <div className="flex justify-center mt-8">
-                <button
-                  onClick={handleLoadMore}
-                  disabled={loadingMore}
-                  className="h-11 px-8 bg-slate-900 text-white rounded-xl font-medium text-sm transition-all duration-300 hover:bg-indigo-600 active:scale-[0.98] disabled:opacity-50"
-                >
-                  {loadingMore ? 'Loading...' : 'Load More'}
-                </button>
-              </div>
+        {/* Category quick-nav row */}
+        <div className="flex items-center gap-3 overflow-x-auto pb-4 mb-6">
+          {categories.map((cat) => (
+            <Link
+              key={cat.id}
+              href={`/category/${cat.slug}`}
+              className={`flex flex-col items-center gap-1.5 flex-shrink-0 w-20 ${cat.id === category.id ? 'text-brand-600' : 'text-neutral-500'}`}
+            >
+              <span className={`relative w-14 h-14 rounded-full overflow-hidden border-2 ${cat.id === category.id ? 'border-brand-500' : 'border-cream'} bg-white`}>
+                <ProductImage src={cat.image} alt={cat.name} fill className="object-cover" />
+              </span>
+              <span className="text-[10px] font-semibold text-center line-clamp-1">{cat.name}</span>
+            </Link>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-6">
+          <CategoryFilterSidebar
+            categories={categories}
+            activeCategoryId={category.id}
+            priceMin={priceRange.min}
+            priceMax={priceRange.max}
+            onApplyPrice={handleApplyPrice}
+          />
+
+          <div>
+            <SortAndViewBar
+              resultCount={sortedProducts.length}
+              sort={sort}
+              onSortChange={setSort}
+              view={view}
+              onViewChange={setView}
+            />
+
+            {loading ? (
+              <p className="text-sm text-neutral-400 text-center py-12">{t('common.loading')}</p>
+            ) : sortedProducts.length > 0 ? (
+              <>
+                {view === 'grid' ? (
+                  <Products productData={sortedProducts} />
+                ) : (
+                  <div className="flex flex-col gap-3">
+                    {sortedProducts.map((p) => (
+                      <ProductListItem key={p._id} {...p} />
+                    ))}
+                  </div>
+                )}
+                <Pagination
+                  currentPage={page}
+                  maxKnownPage={maxKnownPage}
+                  hasNextPage={hasNextPage}
+                  onPageChange={handlePageChange}
+                />
+              </>
+            ) : (
+              <p className="text-sm text-neutral-400 text-center py-12">{t('shop.noProductsFiltered')}</p>
             )}
-          </>
-        ) : (
-          <p className="text-sm text-slate-400 text-center py-12">No products found in this category yet.</p>
-        )}
+          </div>
+        </div>
       </div>
     </>
   )
@@ -102,7 +186,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   }
 
   return {
-    props: { category, productData },
+    props: { category, categories, productData },
     revalidate: 300,
   }
 }

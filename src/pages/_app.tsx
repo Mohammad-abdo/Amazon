@@ -6,26 +6,29 @@ import { Provider } from 'react-redux'
 import { persistor, store } from '@/store/store';
 import { PersistGate } from 'redux-persist/integration/react'
 import { SessionProvider } from "next-auth/react"
+import { LanguageProvider } from '@/contexts/LanguageContext'
 
 
   const  App = ({ Component, pageProps:{ session, ...pageProps } }: AppProps)=> {
-  return (  
+  return (
+    <LanguageProvider>
     <Provider store={store}>
 
       <PersistGate persistor={persistor} loading={null}>
     <SessionProvider session={session}>
-          <div className='font-bodyFont bg-slate-50 min-h-screen flex flex-col justify-between'>
+          <div className='font-bodyFont bg-surface min-h-screen flex flex-col justify-between'>
                <RootLayout>
    <Component {...pageProps} />
    </RootLayout>
 
   </div>
     </SessionProvider>
-  
+
       </PersistGate>
- 
+
     </Provider>
- 
+    </LanguageProvider>
+
   );
 }
 export default   App 

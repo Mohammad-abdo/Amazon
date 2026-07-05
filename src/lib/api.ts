@@ -97,13 +97,24 @@ export interface GetProductsParams {
   limit?: number;
   title?: string;
   categoryId?: number;
+  priceMin?: number;
+  priceMax?: number;
 }
+
+const QUERY_KEY_MAP: Record<keyof GetProductsParams, string> = {
+  offset: "offset",
+  limit: "limit",
+  title: "title",
+  categoryId: "categoryId",
+  priceMin: "price_min",
+  priceMax: "price_max",
+};
 
 const buildQuery = (params: GetProductsParams): string => {
   const query = new URLSearchParams();
   Object.entries(params).forEach(([key, value]) => {
     if (value !== undefined && value !== null && value !== "") {
-      query.set(key, String(value));
+      query.set(QUERY_KEY_MAP[key as keyof GetProductsParams], String(value));
     }
   });
   const str = query.toString();

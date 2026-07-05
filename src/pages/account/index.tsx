@@ -6,21 +6,23 @@ import { signIn } from 'next-auth/react'
 import { StateProps } from '../../../type'
 import { HiOutlineShoppingBag } from 'react-icons/hi'
 import { FaHeart } from 'react-icons/fa'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 const Account = () => {
   const { userInfo } = useSelector((state: StateProps) => state.next)
   const { orders } = useSelector((state: StateProps) => state.orders)
   const { favoriteData } = useSelector((state: StateProps) => state.next)
+  const { t } = useLanguage()
 
   if (!userInfo) {
     return (
-      <div className="min-h-[60vh] flex flex-col items-center justify-center bg-slate-50 gap-4">
-        <h2 className="text-xl font-semibold text-slate-700">Please sign in to view your account</h2>
+      <div className="min-h-[60vh] flex flex-col items-center justify-center bg-surface gap-4">
+        <h2 className="text-xl font-semibold text-brand-900">{t('account.signInPrompt')}</h2>
         <button
           onClick={() => signIn()}
-          className="h-11 px-8 bg-slate-900 text-white rounded-xl font-medium text-sm hover:bg-indigo-600 transition-all"
+          className="h-11 px-8 bg-brand-600 text-white rounded-xl font-medium text-sm hover:bg-brand-500 transition-all"
         >
-          Sign In
+          {t('header.signIn')}
         </button>
       </div>
     )
@@ -29,37 +31,37 @@ const Account = () => {
   return (
     <>
       <Head>
-        <title>My Account - Nexis Premium E-Commerce</title>
+        <title>My Account - Souqi</title>
       </Head>
-      <div className="max-w-screen-2xl mx-auto py-8 px-4 sm:px-6 min-h-[70vh] bg-slate-50">
-        <div className="max-w-2xl mx-auto bg-white border border-slate-100 rounded-2xl p-8 shadow-sm">
-          <div className="flex items-center gap-4 border-b border-slate-100 pb-6 mb-6">
+      <div className="max-w-screen-2xl mx-auto py-8 px-4 sm:px-6 min-h-[70vh] bg-surface">
+        <div className="max-w-2xl mx-auto bg-white border border-cream rounded-2xl p-8 shadow-soft">
+          <div className="flex items-center gap-4 border-b border-cream pb-6 mb-6">
             {userInfo.image ? (
-              <img src={userInfo.image} alt={userInfo.name} className="w-16 h-16 rounded-full object-cover border border-slate-200" />
+              <img src={userInfo.image} alt={userInfo.name} className="w-16 h-16 rounded-full object-cover border border-cream" />
             ) : (
-              <div className="w-16 h-16 rounded-full bg-indigo-600 flex items-center justify-center text-xl font-bold text-white uppercase">
+              <div className="w-16 h-16 rounded-full bg-brand-600 flex items-center justify-center text-xl font-bold text-white uppercase">
                 {userInfo.name?.charAt(0)}
               </div>
             )}
             <div>
-              <h1 className="text-xl font-bold text-slate-900">{userInfo.name}</h1>
-              <p className="text-sm text-slate-400">{userInfo.email}</p>
+              <h1 className="text-xl font-bold text-brand-950">{userInfo.name}</h1>
+              <p className="text-sm text-neutral-400">{userInfo.email}</p>
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
-            <Link href="/account/orders" className="flex items-center gap-3 border border-slate-100 rounded-xl p-4 hover:border-indigo-200 hover:bg-indigo-50/40 transition-colors">
-              <HiOutlineShoppingBag className="text-2xl text-indigo-600" />
+            <Link href="/account/orders" className="flex items-center gap-3 border border-cream rounded-xl p-4 hover:border-brand-200 hover:bg-brand-50/40 transition-colors">
+              <HiOutlineShoppingBag className="text-2xl text-brand-600" />
               <div>
-                <p className="text-sm font-semibold text-slate-800">Order History</p>
-                <p className="text-xs text-slate-400">{orders.length} order{orders.length === 1 ? '' : 's'}</p>
+                <p className="text-sm font-semibold text-brand-950">{t('account.orderHistory')}</p>
+                <p className="text-xs text-neutral-400">{orders.length} order{orders.length === 1 ? '' : 's'}</p>
               </div>
             </Link>
-            <Link href="/favorites" className="flex items-center gap-3 border border-slate-100 rounded-xl p-4 hover:border-indigo-200 hover:bg-indigo-50/40 transition-colors">
-              <FaHeart className="text-2xl text-indigo-600" />
+            <Link href="/favorites" className="flex items-center gap-3 border border-cream rounded-xl p-4 hover:border-brand-200 hover:bg-brand-50/40 transition-colors">
+              <FaHeart className="text-2xl text-brand-600" />
               <div>
-                <p className="text-sm font-semibold text-slate-800">Wishlist</p>
-                <p className="text-xs text-slate-400">{favoriteData.length} item{favoriteData.length === 1 ? '' : 's'}</p>
+                <p className="text-sm font-semibold text-brand-950">{t('account.wishlist')}</p>
+                <p className="text-xs text-neutral-400">{favoriteData.length} item{favoriteData.length === 1 ? '' : 's'}</p>
               </div>
             </Link>
           </div>

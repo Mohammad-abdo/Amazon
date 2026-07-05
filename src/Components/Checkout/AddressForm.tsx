@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useLanguage } from '@/contexts/LanguageContext'
 import { Address } from '../../../type'
 
 interface props {
@@ -18,6 +19,7 @@ const emptyAddress: Address = {
 }
 
 const AddressForm = ({ initialAddress, onSubmit }: props) => {
+  const { t } = useLanguage()
   const [address, setAddress] = useState<Address>(initialAddress || emptyAddress)
 
   const handleChange = (field: keyof Address) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,7 +31,7 @@ const AddressForm = ({ initialAddress, onSubmit }: props) => {
     onSubmit(address)
   }
 
-  const inputClass = 'h-11 px-3 rounded-lg border border-slate-200 text-sm outline-none focus:border-indigo-500 w-full'
+  const inputClass = 'h-11 px-3 rounded-lg border border-cream bg-surface text-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-400/20 w-full'
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4 max-w-lg">
@@ -48,9 +50,9 @@ const AddressForm = ({ initialAddress, onSubmit }: props) => {
 
       <button
         type="submit"
-        className="h-11 mt-2 bg-slate-900 text-white rounded-xl font-medium text-sm transition-all duration-300 hover:bg-indigo-600 active:scale-[0.98] self-start px-8"
+        className="h-11 mt-2 bg-brand-600 text-white rounded-xl font-medium text-sm transition-all duration-300 hover:bg-brand-500 active:scale-[0.98] self-start px-8"
       >
-        Continue to Review
+        {t('checkout.continueToReview')}
       </button>
     </form>
   )

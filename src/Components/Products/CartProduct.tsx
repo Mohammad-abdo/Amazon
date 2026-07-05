@@ -15,9 +15,8 @@ const CartProduct = ({ item }: CartProductProps) => {
   const dispatch = useDispatch()
 
   return (
-    <div className="bg-white border border-slate-100 rounded-2xl p-4 flex flex-col sm:flex-row items-center gap-4 sm:gap-6 shadow-sm hover:shadow-md transition-shadow duration-300">
-      {/* Product Image */}
-      <div className="relative w-32 h-32 bg-slate-50 rounded-xl overflow-hidden flex-shrink-0 flex items-center justify-center border border-slate-100 p-2">
+    <div className="bg-white border border-cream rounded-2xl p-4 flex flex-col sm:flex-row items-center gap-4 sm:gap-6 shadow-soft hover:shadow-card transition-shadow duration-300">
+      <div className="relative w-32 h-32 bg-cream/40 rounded-xl overflow-hidden flex-shrink-0 flex items-center justify-center border border-cream p-2">
         <ProductImage
           width={120}
           height={120}
@@ -30,18 +29,18 @@ const CartProduct = ({ item }: CartProductProps) => {
       {/* Details Panel */}
       <div className="flex-1 flex flex-col md:flex-row md:items-center justify-between gap-4 w-full">
         <div className="flex flex-col gap-1 max-w-md">
-          <span className="text-[10px] text-indigo-600 font-bold uppercase tracking-wider">
+          <span className="text-[10px] text-brand-600 font-bold uppercase tracking-wider">
             {item.category}
           </span>
-          <h4 className="text-base font-semibold text-slate-800 line-clamp-1">
+          <h4 className="text-base font-semibold text-brand-950 line-clamp-1">
             {item.title}
           </h4>
-          <p className="text-xs text-slate-400 line-clamp-2 leading-relaxed mb-2">
+          <p className="text-xs text-neutral-500 line-clamp-2 leading-relaxed mb-2">
             {item.description}
           </p>
-          <div className="text-xs text-slate-500 flex items-center gap-1.5">
+          <div className="text-xs text-neutral-500 flex items-center gap-1.5">
             Unit Price: 
-            <span className="font-semibold text-slate-800">
+            <span className="font-semibold text-brand-950">
               <FormattedPrice amount={item.price} />
             </span>
           </div>
@@ -51,20 +50,20 @@ const CartProduct = ({ item }: CartProductProps) => {
         <div className="flex items-center justify-between md:justify-end gap-6 sm:gap-8 w-full md:w-auto">
           {/* Quantity selector pill */}
           <div className="flex items-center gap-4">
-            <div className="flex items-center border border-slate-200 rounded-full bg-slate-50 p-1 shadow-sm">
+            <div className="flex items-center border border-cream rounded-full bg-cream/40 p-1 shadow-sm">
               <button
                 onClick={() => dispatch(decressQuantaty({ _id: item._id }))}
-                className="w-7 h-7 flex items-center justify-center rounded-full text-slate-600 hover:bg-white hover:text-indigo-600 transition-colors shadow-sm bg-transparent"
+                className="w-7 h-7 flex items-center justify-center rounded-full text-neutral-600 hover:bg-white hover:text-brand-600 transition-colors shadow-sm bg-transparent"
                 title="Decrease Quantity"
               >
                 <LuMinus className="text-xs" />
               </button>
-              <span className="w-8 text-center text-xs font-semibold text-slate-700 select-none">
+              <span className="w-8 text-center text-xs font-semibold text-brand-900 select-none">
                 {item.quantaty}
               </span>
               <button
                 onClick={() => dispatch(incressQuantaty({ _id: item._id }))}
-                className="w-7 h-7 flex items-center justify-center rounded-full text-slate-600 hover:bg-white hover:text-indigo-600 transition-colors shadow-sm bg-transparent"
+                className="w-7 h-7 flex items-center justify-center rounded-full text-neutral-600 hover:bg-white hover:text-brand-600 transition-colors shadow-sm bg-transparent"
                 title="Increase Quantity"
               >
                 <LuPlus className="text-xs" />
@@ -74,7 +73,7 @@ const CartProduct = ({ item }: CartProductProps) => {
             {/* Remove CTA */}
             <button
               onClick={() => dispatch(deleteProduct(item._id))}
-              className="text-slate-400 hover:text-red-500 flex items-center gap-1 text-xs font-medium transition-colors"
+              className="text-neutral-400 hover:text-red-500 flex items-center gap-1 text-xs font-medium transition-colors"
             >
               <CloseIcon className="text-sm" />
               <span>Remove</span>
@@ -83,8 +82,8 @@ const CartProduct = ({ item }: CartProductProps) => {
 
           {/* Subtotal */}
           <div className="text-right">
-            <span className="text-xs text-slate-400 block font-normal">Subtotal</span>
-            <span className="text-base font-bold text-slate-900 block mt-0.5">
+            <span className="text-xs text-neutral-500 block font-normal">Subtotal</span>
+            <span className="text-base font-bold text-brand-950 block mt-0.5">
               <FormattedPrice amount={item.price * item.quantaty} />
             </span>
           </div>

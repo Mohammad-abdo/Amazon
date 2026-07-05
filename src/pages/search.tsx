@@ -4,9 +4,11 @@ import { useRouter } from 'next/router'
 import { productProps } from '../../type'
 import { getProducts } from '@/lib/api'
 import Products from '@/Components/Products/Products'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 const Search = () => {
   const router = useRouter()
+  const { t } = useLanguage()
   const query = typeof router.query.q === 'string' ? router.query.q : ''
 
   const [results, setResults] = useState<productProps[]>([])
@@ -43,25 +45,25 @@ const Search = () => {
   return (
     <>
       <Head>
-        <title>{query ? `Search results for "${query}"` : 'Search'} - Nexis Premium E-Commerce</title>
+        <title>{query ? `Search results for "${query}"` : 'Search'} - Souqi</title>
       </Head>
-      <div className="max-w-screen-2xl mx-auto py-8 px-4 sm:px-6 min-h-[70vh] bg-slate-50">
-        <h1 className="text-2xl font-bold text-slate-800 mb-6">
-          {query ? `Search results for "${query}"` : 'Search'}
+      <div className="max-w-screen-2xl mx-auto py-8 px-4 sm:px-6 min-h-[70vh] bg-surface">
+        <h1 className="text-2xl font-bold text-brand-950 mb-6">
+          {query ? `${t('search.resultsForPrefix')} "${query}"` : t('search.title')}
         </h1>
 
         {!query && (
-          <p className="text-sm text-slate-400">Enter a search term above to find products.</p>
+          <p className="text-sm text-neutral-500">{t('search.enterTerm')}</p>
         )}
 
-        {loading && <p className="text-sm text-slate-400">Searching...</p>}
+        {loading && <p className="text-sm text-neutral-500">{t('search.searching')}</p>}
 
         {error && (
-          <p className="text-sm text-red-500">Something went wrong while searching. Please try again.</p>
+          <p className="text-sm text-red-500">{t('search.error')}</p>
         )}
 
         {!loading && !error && query && results.length === 0 && (
-          <p className="text-sm text-slate-400">No products found for &quot;{query}&quot;.</p>
+          <p className="text-sm text-neutral-500">{t('search.noResults')} &quot;{query}&quot;.</p>
         )}
 
         {!loading && !error && results.length > 0 && <Products productData={results} />}

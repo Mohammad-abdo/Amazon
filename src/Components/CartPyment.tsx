@@ -4,11 +4,13 @@ import { useSelector } from 'react-redux'
 import { StateProps, storeProduct } from '../../type'
 import { useRouter } from 'next/router'
 import { MdOutlineLocalShipping } from 'react-icons/md'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 const CartPyment = () => {
   const { productData, userInfo } = useSelector((state: StateProps) => state.next)
   const [totalamount, setTotalamount] = useState(0)
   const router = useRouter()
+  const { t } = useLanguage()
 
   useEffect(() => {
     let amount = 0
@@ -24,25 +26,25 @@ const CartPyment = () => {
 
   return (
     <div className="flex flex-col gap-5 p-6 w-full bg-white rounded-2xl">
-      <div className="flex items-start gap-3 bg-indigo-50/50 border border-indigo-100 rounded-xl p-3">
-        <span className="bg-indigo-600 rounded-full p-1.5 text-white flex items-center justify-center mt-0.5 shadow-md shadow-indigo-600/10">
+      <div className="flex items-start gap-3 bg-brand-50/50 border border-brand-100 rounded-xl p-3">
+        <span className="bg-brand-600 rounded-full p-1.5 text-white flex items-center justify-center mt-0.5 shadow-md shadow-brand-600/10">
           <MdOutlineLocalShipping className="text-sm" />
         </span>
-        <p className="text-xs text-indigo-900 leading-relaxed">
-          Your order qualifies for <span className="font-bold text-indigo-700">FREE Standard Shipping</span>. Fast courier delivery globally.
+        <p className="text-xs text-brand-900 leading-relaxed">
+          {t('checkout.freeShippingNotice')}
         </p>
       </div>
 
-      <div className="border-b border-slate-100 pb-3 flex items-center justify-between">
-        <span className="text-sm font-medium text-slate-500">Order Subtotal</span>
-        <span className="text-sm font-bold text-slate-900">
+      <div className="border-b border-cream pb-3 flex items-center justify-between">
+        <span className="text-sm font-medium text-neutral-500">{t('checkout.orderSubtotal')}</span>
+        <span className="text-sm font-bold text-brand-950">
           <FormattedPrice amount={totalamount} />
         </span>
       </div>
 
-      <div className="flex items-center justify-between font-semibold text-slate-800">
-        <span>Order Total</span>
-        <span className="text-xl font-extrabold text-indigo-600">
+      <div className="flex items-center justify-between font-semibold text-brand-950">
+        <span>{t('checkout.orderTotal')}</span>
+        <span className="text-xl font-extrabold text-brand-600">
           <FormattedPrice amount={totalamount} />
         </span>
       </div>
@@ -50,20 +52,20 @@ const CartPyment = () => {
       {userInfo ? (
         <button
           onClick={handleCheckout}
-          className="w-full h-11 bg-slate-900 text-white rounded-xl font-medium text-sm transition-all duration-300 hover:bg-indigo-650 active:scale-[0.98] shadow-sm hover:shadow-md"
+          className="w-full h-11 bg-brand-600 text-white rounded-xl font-medium text-sm transition-all duration-300 hover:bg-brand-500 active:scale-[0.98] shadow-sm hover:shadow-md"
         >
-          Proceed to Checkout
+          {t('checkout.proceedToCheckout')}
         </button>
       ) : (
         <div className="flex flex-col items-center gap-2.5">
           <button
             disabled
-            className="w-full h-11 bg-slate-200 text-slate-400 rounded-xl font-medium text-sm cursor-not-allowed shadow-inner"
+            className="w-full h-11 bg-cream text-neutral-400 rounded-xl font-medium text-sm cursor-not-allowed shadow-inner"
           >
-            Proceed to Checkout
+            {t('checkout.proceedToCheckout')}
           </button>
           <p className="text-xs text-red-500 font-semibold animate-pulse">
-            Please log in above to place your order.
+            {t('checkout.pleaseSignIn')}
           </p>
         </div>
       )}

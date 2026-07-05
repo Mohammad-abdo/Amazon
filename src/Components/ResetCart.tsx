@@ -17,7 +17,7 @@ const ResetCart = () => {
     <div className=''>
       <button 
         onClick={handelResetCart} 
-        className="px-6 h-10 font-semibold text-slate-500 hover:text-red-500 hover:bg-red-50/50 border border-slate-250 hover:border-red-200 rounded-xl transition-all duration-300 text-xs sm:text-sm"
+        className="px-6 h-10 font-semibold text-neutral-500 hover:text-red-500 hover:bg-red-50/50 border border-cream hover:border-red-200 rounded-xl transition-all duration-300 text-xs sm:text-sm"
       > 
         Reset Cart
       </button>
