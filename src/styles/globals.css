@@ -7,14 +7,35 @@
 @layer base {
   :root {
     --brand-primary: #D47A01;
-    --brand-primary-dark: #AD6301;
+    --brand-primary-light: #E8952E;
     --brand-cream: #F2E9E1;
-    --brand-base: #FDFDFD;
-    --brand-ink: #2E1A01;
+    --brand-peach: #FFF5EB;
+    --brand-base: #FFFBF7;
+    --brand-ink: #523120;
   }
 
   body {
-    @apply text-brand-950 bg-surface antialiased selection:bg-brand-500 selection:text-white font-bodyFont;
+    @apply text-ink antialiased selection:bg-brand-400 selection:text-white font-bodyFont;
+    background: linear-gradient(180deg, #FFF5EB 0%, #FFFBF7 35%, #FEF4E8 100%);
+    background-attachment: fixed;
+  }
+}
+
+@layer components {
+  .page-container {
+    @apply w-full max-w-page mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 2xl:px-12;
+  }
+
+  .section-card {
+    @apply bg-white/80 backdrop-blur-sm border border-brand-100 rounded-3xl shadow-soft;
+  }
+
+  .vibrant-panel {
+    @apply bg-orange-gradient text-white shadow-glow;
+  }
+
+  .vibrant-panel-soft {
+    @apply bg-orange-soft border border-brand-200 text-ink shadow-soft;
   }
 }
 
@@ -24,11 +45,11 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #F2E9E1;
+  background: #FEF4E8;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #E38C1F;
+  background: #E8952E;
   border-radius: 4px;
 }
 
@@ -37,20 +58,21 @@
 }
 
 .glass-nav {
-  background: rgba(253, 253, 253, 0.92);
+  background: rgba(255, 251, 247, 0.92);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(251, 228, 196, 0.6);
 }
 
 .glass-card {
-  background: rgba(253, 253, 253, 0.85);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(242, 233, 225, 0.8);
+  border: 1px solid rgba(251, 228, 196, 0.8);
 }
 
 .btn-brand {
-  @apply bg-brand-600 text-white font-semibold rounded-xl transition-all duration-300 hover:bg-brand-500 active:scale-[0.98] shadow-sm hover:shadow-md hover:shadow-brand-600/20;
+  @apply bg-brand-500 text-white font-semibold rounded-xl transition-all duration-300 hover:bg-brand-400 active:scale-[0.98] shadow-sm hover:shadow-glow;
 }
 
 .btn-brand-glow {
@@ -69,7 +91,7 @@
   background: linear-gradient(
     to right,
     rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0.35) 50%,
     rgba(255, 255, 255, 0) 100%
   );
   transform: skewX(-25deg);

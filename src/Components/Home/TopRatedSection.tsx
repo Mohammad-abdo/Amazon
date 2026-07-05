@@ -16,7 +16,7 @@ const TopRatedSection = ({ items }: props) => {
   if (items.length === 0) return null
 
   return (
-    <section className="mt-12 px-4 sm:px-6">
+    <section className="mt-12 w-full">
       <div className="flex items-end justify-between mb-6">
         <div>
           <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-600">{t('home.topRatedEyebrow')}</span>
@@ -27,7 +27,7 @@ const TopRatedSection = ({ items }: props) => {
         </Link>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 xl:gap-5">
         {items.map((item) => (
           <div
             key={item.id}

@@ -29,7 +29,7 @@ const Favorites = () => {
         <title>My Wishlist & Favorites - Souqi</title>
         <meta name="description" content="View your saved items, move items to cart, and manage your custom Souqi shopping wishlist." />
       </Head>
-      <div className="max-w-screen-2xl mx-auto py-8 px-4 sm:px-6 min-h-[70vh] bg-surface">
+      <div className="page-container py-8 min-h-[70vh] bg-surface">
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-between border-b border-cream pb-4 mb-6">
           <h1 className="text-2xl font-bold text-brand-950 flex items-center gap-2">

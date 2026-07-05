@@ -13,12 +13,12 @@ const Magazine = ({ posts }: props) => {
   const { t } = useLanguage()
 
   const gradients = [
-    'from-brand-600 to-brand-800',
-    'from-brand-800 to-brand-950',
+    'from-brand-400 to-brand-600',
+    'from-brand-500 to-brand-700',
+    'from-brand-300 to-brand-500',
     'from-brand-400 to-brand-700',
-    'from-brand-700 to-brand-900',
-    'from-brand-500 to-brand-800',
-    'from-brand-900 to-brand-700',
+    'from-brand-500 to-brand-600',
+    'from-brand-300 to-brand-600',
   ]
 
   return (
@@ -28,7 +28,7 @@ const Magazine = ({ posts }: props) => {
         <meta name="description" content={t('magazine.pageDescription')} />
       </Head>
       <main className="bg-surface min-h-screen pb-20">
-        <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 py-8">
+        <div className="page-container py-8">
           <div className="mb-10">
             <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-600">{t('magazine.eyebrow')}</span>
             <h1 className="text-3xl font-extrabold text-brand-950 mt-1">{t('magazine.title')}</h1>
@@ -36,7 +36,7 @@ const Magazine = ({ posts }: props) => {
           </div>
 
           {posts.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-6 xl:gap-8">
               {posts.map((post, idx) => (
                 <Link
                   key={post.id}

@@ -23,7 +23,7 @@ const Brands = ({ brands }: props) => {
         <meta name="description" content={t('brands.pageDescription')} />
       </Head>
       <main className="bg-surface min-h-screen pb-20">
-        <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 py-8">
+        <div className="page-container py-8">
           <div className="text-center mb-10">
             <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-600">{t('brands.eyebrow')}</span>
             <h1 className="text-3xl font-extrabold text-brand-950 mt-1">{t('brands.title')}</h1>
@@ -31,7 +31,7 @@ const Brands = ({ brands }: props) => {
           </div>
 
           {brands.length > 0 ? (
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 xl:gap-5">
               {brands.map((brand, idx) => (
                 <Link
                   key={brand}

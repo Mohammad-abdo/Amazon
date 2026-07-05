@@ -4,16 +4,16 @@ import { useLanguage } from '@/contexts/LanguageContext'
 import { HiOutlineLightningBolt, HiOutlineBookOpen, HiOutlineTruck } from 'react-icons/hi'
 
 const PROMOS = [
-  { icon: HiOutlineLightningBolt, key: 'deals' as const, href: '/deals', gradient: 'from-brand-600 to-brand-800' },
-  { icon: HiOutlineTruck, key: 'shipping' as const, href: '/shipping', gradient: 'from-brand-800 to-brand-950' },
-  { icon: HiOutlineBookOpen, key: 'magazine' as const, href: '/magazine', gradient: 'from-brand-500 to-brand-700' },
+  { icon: HiOutlineLightningBolt, key: 'deals' as const, href: '/deals', gradient: 'from-brand-400 to-brand-600' },
+  { icon: HiOutlineTruck, key: 'shipping' as const, href: '/shipping', gradient: 'from-brand-500 to-brand-700' },
+  { icon: HiOutlineBookOpen, key: 'magazine' as const, href: '/magazine', gradient: 'from-brand-300 to-brand-500' },
 ]
 
 const PromoCards = () => {
   const { t } = useLanguage()
 
   return (
-    <section className="mt-12 px-4 sm:px-6">
+    <section className="mt-12 w-full">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {PROMOS.map(({ icon: Icon, key, href, gradient }) => (
           <Link

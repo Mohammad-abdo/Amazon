@@ -33,7 +33,7 @@ const Faq = () => {
         <title>FAQ - Souqi</title>
         <meta name="description" content="Frequently asked questions about shopping at Souqi." />
       </Head>
-      <div className="max-w-screen-2xl mx-auto py-12 px-4 sm:px-6 min-h-[70vh] bg-surface">
+      <div className="page-container py-12 min-h-[70vh] bg-surface">
         <div className="max-w-2xl mx-auto">
           <h1 className="text-2xl font-bold text-brand-950 mb-6">{t('faq.title')}</h1>
           <div className="flex flex-col gap-4">

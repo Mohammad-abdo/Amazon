@@ -17,7 +17,7 @@ const Cart = () => {
         <title>Shopping Cart - Souqi</title>
         <meta name="description" content="Review your selected products, adjust item quantities, and checkout securely at Souqi." />
       </Head>
-      <div className="max-w-screen-2xl mx-auto py-8 px-4 sm:px-6 min-h-[70vh] bg-surface">
+      <div className="page-container py-8 min-h-[70vh] bg-surface">
       {productData.length > 0 ? (
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
           <div className="lg:col-span-4 bg-white border border-cream p-6 rounded-2xl shadow-soft">

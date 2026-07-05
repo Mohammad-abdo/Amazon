@@ -56,7 +56,7 @@ const Header = () => {
 
   return (
     <header className="glass-nav border-b border-cream text-brand-950 h-[72px] w-full sticky top-0 z-50 shadow-header">
-      <div className="h-full max-w-screen-2xl mx-auto flex items-center justify-between gap-4 px-4 sm:px-6">
+      <div className="h-full page-container flex items-center justify-between gap-4 xl:gap-6">
 
         <Link
           href="/"
@@ -75,7 +75,7 @@ const Header = () => {
 
         <form
           onSubmit={handleSearchSubmit}
-          className="flex-1 max-w-xl hidden md:flex h-11 relative rounded-full overflow-hidden border border-cream bg-cream/50 focus-within:border-brand-400 focus-within:ring-2 focus-within:ring-brand-400/20 transition-all duration-300"
+          className="flex-1 max-w-xl xl:max-w-2xl 2xl:max-w-3xl hidden md:flex h-11 relative rounded-full overflow-hidden border border-cream bg-cream/50 focus-within:border-brand-400 focus-within:ring-2 focus-within:ring-brand-400/20 transition-all duration-300"
         >
           <input
             type="text"
@@ -168,7 +168,7 @@ const Header = () => {
               </span>
             </div>
             {cartlength > 0 && (
-              <span className="absolute -top-1.5 -right-1.5 bg-brand-950 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-md">
+              <span className="absolute -top-1.5 -right-1.5 bg-brand-500 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-md">
                 {cartlength}
               </span>
             )}

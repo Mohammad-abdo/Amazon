@@ -47,7 +47,7 @@ const Search = () => {
       <Head>
         <title>{query ? `Search results for "${query}"` : 'Search'} - Souqi</title>
       </Head>
-      <div className="max-w-screen-2xl mx-auto py-8 px-4 sm:px-6 min-h-[70vh] bg-surface">
+      <div className="page-container py-8 min-h-[70vh] bg-surface">
         <h1 className="text-2xl font-bold text-brand-950 mb-6">
           {query ? `${t('search.resultsForPrefix')} "${query}"` : t('search.title')}
         </h1>

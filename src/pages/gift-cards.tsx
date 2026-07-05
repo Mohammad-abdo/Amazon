@@ -15,7 +15,7 @@ const GiftCards = () => {
         <meta name="description" content={t('giftCards.pageDescription')} />
       </Head>
       <main className="bg-surface min-h-screen pb-20">
-        <div className="max-w-screen-lg mx-auto px-4 sm:px-6 py-8">
+        <div className="page-container py-8">
           <div className="text-center mb-10">
             <div className="w-16 h-16 rounded-2xl bg-brand-600 flex items-center justify-center mx-auto mb-4 shadow-card">
               <HiOutlineGift className="text-white text-3xl" />

@@ -77,8 +77,8 @@ const ProductCard = ({
   const discountAmount = oldPrice - price
 
   return (
-    <div className="group relative bg-white border border-cream hover:border-brand-200 rounded-3xl overflow-hidden shadow-soft hover:shadow-card transition-all duration-500 flex flex-col h-full">
-      <div className="relative w-full pt-[85%] bg-cream/40 overflow-hidden cursor-pointer">
+    <div className="group relative bg-white/90 border border-brand-100 hover:border-brand-300 rounded-3xl overflow-hidden shadow-soft hover:shadow-card transition-all duration-500 flex flex-col h-full">
+      <div className="relative w-full pt-[85%] bg-brand-50 overflow-hidden cursor-pointer">
         <Link href={`/product/${_id}`}>
           <ProductImage
             src={image}
@@ -149,7 +149,7 @@ const ProductCard = ({
 
           <button
             onClick={handleAddToCart}
-            className="w-full h-11 bg-brand-600 text-white rounded-2xl font-medium text-sm transition-all duration-300 hover:bg-brand-500 active:scale-[0.98] flex items-center justify-center gap-2 shadow-sm hover:shadow-md hover:shadow-brand-600/20"
+            className="w-full h-11 bg-brand-500 text-white rounded-2xl font-medium text-sm transition-all duration-300 hover:bg-brand-400 active:scale-[0.98] flex items-center justify-center gap-2 shadow-sm hover:shadow-glow"
           >
             <HiShoppingCart className="text-base" />
             {t('product.addToCart')}

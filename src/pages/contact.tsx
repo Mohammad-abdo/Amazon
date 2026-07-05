@@ -24,7 +24,7 @@ const Contact = () => {
         <title>Contact Us - Souqi</title>
         <meta name="description" content="Get in touch with the Souqi team." />
       </Head>
-      <div className="max-w-screen-2xl mx-auto py-12 px-4 sm:px-6 min-h-[70vh] bg-surface">
+      <div className="page-container py-12 min-h-[70vh] bg-surface">
         <div className="max-w-lg mx-auto bg-white border border-cream rounded-2xl p-8 shadow-soft">
           <h1 className="text-2xl font-bold text-brand-950 mb-2">{t('contact.title')}</h1>
           <p className="text-sm text-neutral-500 mb-6">

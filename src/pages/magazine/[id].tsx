@@ -38,7 +38,7 @@ const MagazineArticle = ({ post }: props) => {
             <HiOutlineArrowLeft /> {t('magazine.backToMagazine')}
           </Link>
 
-          <div className="bg-gradient-to-br from-brand-700 to-brand-950 rounded-3xl p-8 sm:p-10 mb-8 relative overflow-hidden">
+          <div className="bg-gradient-to-br from-brand-500 to-brand-700 rounded-3xl p-8 sm:p-10 mb-8 relative overflow-hidden shadow-glow">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(212,122,1,0.25),transparent_60%)]" />
             <div className="relative">
               <div className="flex flex-wrap gap-2 mb-4">

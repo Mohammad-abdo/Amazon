@@ -15,8 +15,8 @@ const ProductSection = ({ title, viewAllHref, productData }: props) => {
   if (productData.length === 0) return null
 
   return (
-    <section className="mt-10">
-      <div className="flex items-center justify-between mb-5 px-6">
+    <section className="mt-10 xl:mt-12 w-full">
+      <div className="flex items-center justify-between mb-5">
         <h2 className="text-xl font-bold text-brand-950">{title}</h2>
         <Link href={viewAllHref} className="text-xs font-semibold text-brand-600 hover:text-brand-500 transition-colors">
           {t('home.viewAll')}

@@ -33,7 +33,7 @@ const Account = () => {
       <Head>
         <title>My Account - Souqi</title>
       </Head>
-      <div className="max-w-screen-2xl mx-auto py-8 px-4 sm:px-6 min-h-[70vh] bg-surface">
+      <div className="page-container py-8 min-h-[70vh] bg-surface">
         <div className="max-w-2xl mx-auto bg-white border border-cream rounded-2xl p-8 shadow-soft">
           <div className="flex items-center gap-4 border-b border-cream pb-6 mb-6">
             {userInfo.image ? (

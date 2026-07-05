@@ -37,15 +37,15 @@ const Banner = ({ compact = false }: BannerProps) => {
         className="w-full"
       >
         {slides.map((slide, idx) => (
-          <div key={idx} className={`relative w-full bg-brand-950 ${compact ? 'h-[32vh] md:h-[46vh]' : 'md:h-[70vh] h-[40vh]'}`}>
+          <div key={idx} className={`relative w-full bg-brand-600 ${compact ? 'h-[32vh] md:h-[46vh] xl:h-[52vh] 2xl:h-[58vh]' : 'md:h-[70vh] h-[40vh]'}`}>
             <Image
               priority={idx === 0}
               src={slide.image}
-              className="w-full h-full object-cover opacity-70"
+              className="w-full h-full object-cover opacity-85"
               alt={slide.title}
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-brand-950/80 via-brand-900/40 to-transparent flex flex-col justify-center items-start px-6 md:px-20 text-left z-10">
-              <span className="text-xs md:text-sm text-brand-300 font-bold uppercase tracking-widest mb-2">
+            <div className="absolute inset-0 bg-gradient-to-r from-brand-700/55 via-brand-500/25 to-transparent flex flex-col justify-center items-start px-6 md:px-20 text-left z-10">
+              <span className="text-xs md:text-sm text-brand-100 font-bold uppercase tracking-widest mb-2">
                 {slide.tag}
               </span>
               <h2 className={`font-extrabold text-white mb-3 max-w-xl leading-tight ${compact ? 'text-xl md:text-3xl' : 'text-2xl md:text-5xl'}`}>
@@ -56,7 +56,7 @@ const Banner = ({ compact = false }: BannerProps) => {
                   {slide.subtitle}
                 </p>
               )}
-              <button className="h-9 md:h-11 px-5 md:px-7 bg-brand-600 text-white font-semibold text-xs md:text-sm rounded-full hover:bg-brand-500 active:scale-[0.98] transition-all duration-300 shadow-lg shadow-brand-600/35 btn-brand-glow">
+              <button className="h-9 md:h-11 px-5 md:px-7 bg-white text-brand-600 font-semibold text-xs md:text-sm rounded-full hover:bg-brand-50 active:scale-[0.98] transition-all duration-300 shadow-lg shadow-black/10 btn-brand-glow">
                 Explore Collection
               </button>
             </div>

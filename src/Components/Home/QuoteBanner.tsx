@@ -13,11 +13,11 @@ const QuoteBanner = ({ quote }: props) => {
   if (!quote) return null
 
   return (
-    <section className="mt-12 mx-4 sm:mx-6">
-      <div className="relative bg-cream/60 border border-cream rounded-3xl p-8 sm:p-10 text-center overflow-hidden">
-        <div className="absolute top-4 left-6 text-6xl text-brand-200 font-serif leading-none select-none">&ldquo;</div>
+    <section className="mt-12 w-full">
+      <div className="relative vibrant-panel-soft rounded-3xl p-8 sm:p-10 text-center overflow-hidden">
+        <div className="absolute top-4 left-6 text-6xl text-brand-300/60 font-serif leading-none select-none">&ldquo;</div>
         <blockquote className="relative max-w-2xl mx-auto">
-          <p className="text-base sm:text-lg text-brand-900 font-medium leading-relaxed italic">
+          <p className="text-base sm:text-lg text-brand-800 font-medium leading-relaxed italic">
             {quote.content}
           </p>
           <footer className="mt-4 text-sm text-neutral-500">— {quote.author}</footer>

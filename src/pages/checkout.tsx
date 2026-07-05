@@ -65,7 +65,7 @@ const Checkout = () => {
       <Head>
         <title>Checkout - Souqi</title>
       </Head>
-      <div className="max-w-screen-2xl mx-auto py-8 px-4 sm:px-6 min-h-[70vh] bg-surface">
+      <div className="page-container py-8 min-h-[70vh] bg-surface">
         <div className="max-w-3xl mx-auto bg-white border border-cream rounded-2xl p-6 md:p-10 shadow-soft">
           <h1 className="text-2xl font-bold text-brand-950 mb-6">{t('checkout.title')}</h1>
           <StepIndicator step={step} />

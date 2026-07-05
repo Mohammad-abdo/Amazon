@@ -84,7 +84,7 @@ const CategoryPage = ({ category, categories, productData }: props) => {
         <title>{category.name} - Souqi</title>
         <meta name="description" content={`Shop ${category.name} at Souqi.`} />
       </Head>
-      <div className="max-w-screen-2xl mx-auto py-8 px-4 sm:px-6 min-h-[70vh] bg-surface">
+      <div className="page-container py-8 min-h-[70vh] bg-surface">
         <div className="flex items-center justify-between mb-6">
           <Link href="/categories" className="flex items-center gap-1.5 text-xs md:text-sm font-semibold text-neutral-500 hover:text-brand-950 transition-colors">
             <IoMdArrowBack className="text-base" />
@@ -109,7 +109,7 @@ const CategoryPage = ({ category, categories, productData }: props) => {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] xl:grid-cols-[300px_1fr] 2xl:grid-cols-[320px_1fr] gap-6 xl:gap-8">
           <CategoryFilterSidebar
             categories={categories}
             activeCategoryId={category.id}

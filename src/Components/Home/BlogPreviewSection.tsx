@@ -14,7 +14,7 @@ const BlogPreviewSection = ({ posts }: props) => {
   if (posts.length === 0) return null
 
   return (
-    <section className="mt-12 px-4 sm:px-6">
+    <section className="mt-12 w-full">
       <div className="flex items-end justify-between mb-6">
         <div>
           <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-600">{t('home.magazineEyebrow')}</span>
@@ -28,7 +28,7 @@ const BlogPreviewSection = ({ posts }: props) => {
         </Link>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-5 xl:gap-6">
         {posts.slice(0, 3).map((post, idx) => (
           <Link
             key={post.id}
@@ -38,10 +38,10 @@ const BlogPreviewSection = ({ posts }: props) => {
             <div
               className={`h-36 flex items-end p-5 ${
                 idx === 0
-                  ? 'bg-gradient-to-br from-brand-600 to-brand-800'
+                  ? 'bg-gradient-to-br from-brand-400 to-brand-600'
                   : idx === 1
-                    ? 'bg-gradient-to-br from-brand-800 to-brand-950'
-                    : 'bg-gradient-to-br from-brand-400 to-brand-700'
+                    ? 'bg-gradient-to-br from-brand-500 to-brand-700'
+                    : 'bg-gradient-to-br from-brand-300 to-brand-500'
               }`}
             >
               {post.tags[0] && (

@@ -11,10 +11,10 @@ const features = [
 
 const FeatureStrip = () => {
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 px-4 sm:px-6 mt-6">
+    <div className="w-full mt-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 xl:grid-cols-5 gap-4 xl:gap-5">
       {features.map(({ icon: Icon, title, subtitle }) => (
-        <div key={title} className="bg-white border border-cream rounded-2xl p-4 flex items-center gap-3 shadow-soft hover:shadow-card transition-shadow duration-300">
-          <div className="w-10 h-10 rounded-xl bg-brand-50 flex items-center justify-center flex-shrink-0">
+        <div key={title} className="bg-white/90 border border-brand-100 rounded-2xl p-4 flex items-center gap-3 shadow-soft hover:shadow-card hover:border-brand-300 transition-all duration-300">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-100 to-brand-200 flex items-center justify-center flex-shrink-0">
             <Icon className="text-xl text-brand-600" />
           </div>
           <div>

@@ -29,11 +29,11 @@ const BottomHeader = () => {
   }
 
   return (
-    <div className="bg-brand-600 text-white h-10 w-full text-xs sm:text-sm flex items-center px-4 justify-between">
+    <div className="bg-brand-500 text-white h-10 w-full text-xs sm:text-sm flex items-center px-4 justify-between shadow-sm">
       <div className="flex items-center gap-1 sm:gap-2">
         <Link
           href="/categories"
-          className="flex items-center gap-1.5 h-8 cursor-pointer hover:bg-brand-700 px-3.5 rounded-lg transition-all duration-200 font-semibold"
+            className="flex items-center gap-1.5 h-8 cursor-pointer hover:bg-brand-400 px-3.5 rounded-lg transition-all duration-200 font-semibold"
         >
           <LuMenu className="text-lg" /> {t('bottomHeader.allCategories')}
         </Link>
@@ -41,7 +41,7 @@ const BottomHeader = () => {
           <Link
             href={link.path}
             key={link.id}
-            className="hover:bg-brand-700 hidden md:inline-flex items-center h-8 cursor-pointer px-3.5 rounded-lg transition-all duration-200 font-medium text-brand-50"
+            className="hover:bg-brand-400 hidden md:inline-flex items-center h-8 cursor-pointer px-3.5 rounded-lg transition-all duration-200 font-medium text-white"
           >
             {t(link.key)}
           </Link>

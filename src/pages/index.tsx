@@ -63,8 +63,8 @@ export default function Home({
         <title>Souqi - Curated Luxury Tech, Accessories & Lifestyle</title>
         <meta name="description" content="Explore a curated selection of tech, accessories, apparel and lifestyle products at Souqi." />
       </Head>
-      <main className="bg-surface min-h-screen pb-20">
-        <div className="max-w-screen-2xl mx-auto">
+      <main className="min-h-screen pb-20">
+        <div className="page-container">
           <HeroSection categories={categories} />
           <ExchangeRateBar rates={rates} />
           <StatsSection />

@@ -7,13 +7,13 @@ const DealsBanner = () => {
   const { t } = useLanguage()
 
   return (
-    <section className="mt-10 mx-4 sm:mx-6">
+    <section className="mt-10 w-full">
       <Link
         href="/deals"
-        className="group relative block overflow-hidden rounded-3xl bg-gradient-to-r from-brand-600 via-brand-500 to-brand-700 p-6 sm:p-8 shadow-card hover:shadow-lg transition-all duration-300"
+        className="group relative block overflow-hidden rounded-3xl bg-gradient-to-r from-brand-500 via-brand-400 to-brand-600 p-6 sm:p-8 shadow-card hover:shadow-glow transition-all duration-300"
       >
-        <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/3 blur-2xl" />
-        <div className="absolute bottom-0 left-0 w-48 h-48 bg-brand-950/20 rounded-full translate-y-1/2 -translate-x-1/4 blur-xl" />
+        <div className="absolute top-0 right-0 w-64 h-64 bg-white/15 rounded-full -translate-y-1/2 translate-x-1/3 blur-2xl" />
+        <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full translate-y-1/2 -translate-x-1/4 blur-xl" />
 
         <div className="relative flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex items-start gap-4">

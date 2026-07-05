@@ -31,11 +31,11 @@ const Shipping = ({ countries, rates }: props) => {
         <title>{t('shipping.pageTitle')} - Souqi</title>
         <meta name="description" content={t('shipping.pageDescription')} />
       </Head>
-      <main className="bg-surface min-h-screen pb-20">
-        <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 py-8">
+      <main className="min-h-screen pb-20">
+        <div className="page-container py-8">
           {/* Hero */}
           <div className="text-center mb-12">
-            <div className="w-16 h-16 rounded-2xl bg-brand-600 flex items-center justify-center mx-auto mb-4 shadow-card">
+            <div className="w-16 h-16 rounded-2xl bg-brand-500 flex items-center justify-center mx-auto mb-4 shadow-glow">
               <HiOutlineGlobeAlt className="text-white text-3xl" />
             </div>
             <h1 className="text-3xl font-extrabold text-brand-950">{t('shipping.title')}</h1>
@@ -45,8 +45,8 @@ const Shipping = ({ countries, rates }: props) => {
           {/* Features */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
             {SHIPPING_FEATURES.map(({ icon: Icon, key }) => (
-              <div key={key} className="bg-white border border-cream rounded-2xl p-5 shadow-soft text-center">
-                <div className="w-10 h-10 rounded-xl bg-brand-50 flex items-center justify-center mx-auto mb-3">
+              <div key={key} className="bg-white/90 border border-brand-100 rounded-2xl p-5 shadow-soft text-center hover:border-brand-300 hover:shadow-card transition-all duration-300">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-100 to-brand-200 flex items-center justify-center mx-auto mb-3">
                   <Icon className="text-brand-600 text-xl" />
                 </div>
                 <h3 className="text-sm font-bold text-brand-950 mb-1">{t(`shipping.${key}Title`)}</h3>
@@ -57,7 +57,9 @@ const Shipping = ({ countries, rates }: props) => {
 
           {/* Exchange rates */}
           {rates && (
-            <div className="bg-gradient-to-r from-brand-950 to-brand-800 rounded-3xl p-6 sm:p-8 mb-12">
+            <div className="vibrant-panel rounded-3xl p-6 sm:p-8 mb-12 relative overflow-hidden">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(255,255,255,0.18),transparent_55%)]" />
+              <div className="relative">
               <h2 className="text-lg font-bold text-white mb-1">{t('shipping.ratesTitle')}</h2>
               <p className="text-xs text-brand-200 mb-5">{t('home.ratesUpdated')} {rates.date}</p>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
@@ -68,6 +70,7 @@ const Shipping = ({ countries, rates }: props) => {
                     <span className="text-[10px] text-brand-300 block mt-0.5">{code}</span>
                   </div>
                 ))}
+              </div>
               </div>
             </div>
           )}

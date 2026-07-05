@@ -16,7 +16,7 @@ import { LanguageProvider } from '@/contexts/LanguageContext'
 
       <PersistGate persistor={persistor} loading={null}>
     <SessionProvider session={session}>
-          <div className='font-bodyFont bg-surface min-h-screen flex flex-col justify-between'>
+          <div className='font-bodyFont min-h-screen flex flex-col justify-between'>
                <RootLayout>
    <Component {...pageProps} />
    </RootLayout>

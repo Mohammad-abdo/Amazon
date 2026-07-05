@@ -10,7 +10,7 @@ interface props {
 const CategorySidebar = ({ categories }: props) => {
   return (
     <aside className="hidden md:flex flex-col bg-white border border-cream rounded-2xl shadow-soft overflow-hidden h-full">
-      <div className="bg-brand-600 text-white text-xs font-bold uppercase tracking-wider px-4 py-3.5">
+      <div className="bg-brand-500 text-white text-xs font-bold uppercase tracking-wider px-4 py-3.5">
         All Departments
       </div>
       <nav className="flex-1 overflow-y-auto divide-y divide-cream/60">

@@ -15,7 +15,7 @@ const ShippingCountriesSection = ({ countries }: props) => {
   if (countries.length === 0) return null
 
   return (
-    <section className="mt-12 mx-4 sm:mx-6 bg-cream/50 border border-cream rounded-3xl p-6 sm:p-8">
+    <section className="mt-12 w-full bg-cream/50 border border-cream rounded-3xl p-6 sm:p-8 xl:p-10">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div className="flex items-center gap-3">
           <div className="w-11 h-11 rounded-2xl bg-brand-600 flex items-center justify-center shadow-soft">
