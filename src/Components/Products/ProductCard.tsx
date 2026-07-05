@@ -77,8 +77,8 @@ const ProductCard = ({
   const discountAmount = oldPrice - price
 
   return (
-    <div className="group relative bg-white/90 border border-brand-100 hover:border-brand-300 rounded-3xl overflow-hidden shadow-soft hover:shadow-card transition-all duration-500 flex flex-col h-full">
-      <div className="relative w-full pt-[85%] bg-brand-50 overflow-hidden cursor-pointer">
+    <div className="group relative bg-white rounded-3xl overflow-hidden shadow-soft hover:shadow-card transition-all duration-500 flex flex-col h-full">
+      <div className="relative w-full pt-[85%] bg-brand-50/40 overflow-hidden cursor-pointer rounded-t-3xl">
         <Link href={`/product/${_id}`}>
           <ProductImage
             src={image}
@@ -119,7 +119,7 @@ const ProductCard = ({
       </div>
 
       {/* Product Description Panel */}
-      <div className="p-5 flex flex-col flex-1">
+      <div className="p-5 flex flex-col flex-1 bg-white">
         <span className="text-[11px] text-brand-500 font-bold uppercase tracking-wider mb-1.5">
           {category}
         </span>
@@ -149,7 +149,7 @@ const ProductCard = ({
 
           <button
             onClick={handleAddToCart}
-            className="w-full h-11 bg-brand-500 text-white rounded-2xl font-medium text-sm transition-all duration-300 hover:bg-brand-400 active:scale-[0.98] flex items-center justify-center gap-2 shadow-sm hover:shadow-glow"
+            className="w-full h-11 bg-brand-500 text-white rounded-full font-medium text-sm transition-all duration-300 hover:bg-brand-400 active:scale-[0.98] flex items-center justify-center gap-2 shadow-sm hover:shadow-glow"
           >
             <HiShoppingCart className="text-base" />
             {t('product.addToCart')}

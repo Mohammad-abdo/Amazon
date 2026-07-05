@@ -5,6 +5,15 @@ import { Category } from '../../../type'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { HiOutlineArrowRight } from 'react-icons/hi'
 
+const PASTELS = [
+  'bg-pastel-pink',
+  'bg-pastel-blue',
+  'bg-pastel-mint',
+  'bg-pastel-lavender',
+  'bg-pastel-yellow',
+  'bg-pastel-sand',
+]
+
 interface props {
   categories: Category[]
 }
@@ -27,23 +36,25 @@ const CategoryShowcase = ({ categories }: props) => {
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 2xl:grid-cols-8 gap-4 xl:gap-5">
-        {categories.slice(0, 12).map((cat) => (
+        {categories.slice(0, 12).map((cat, idx) => (
           <Link
             key={cat.id}
             href={`/category/${cat.slug}`}
-            className={`group relative bg-white/90 border border-brand-100 rounded-2xl overflow-hidden shadow-soft hover:shadow-card hover:border-brand-300 transition-all duration-300`}
+            className="group relative rounded-3xl overflow-hidden shadow-soft hover:shadow-card transition-all duration-300"
           >
-            <div className="relative pt-[80%] bg-cream/40">
-              <ProductImage
-                src={cat.image}
-                alt={cat.name}
-                fill
-                className="object-cover group-hover:scale-110 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-brand-600/75 via-brand-400/20 to-transparent" />
+            <div className={`relative pt-[100%] ${PASTELS[idx % PASTELS.length]} flex items-center justify-center`}>
+              <div className="absolute inset-0 flex items-center justify-center p-4">
+                <ProductImage
+                  src={cat.image}
+                  alt={cat.name}
+                  width={80}
+                  height={80}
+                  className="object-contain w-16 h-16 sm:w-20 sm:h-20 group-hover:scale-110 transition-transform duration-500 drop-shadow-md"
+                />
+              </div>
             </div>
-            <div className="absolute bottom-0 inset-x-0 p-3">
-              <p className="text-xs font-bold text-white line-clamp-2 leading-snug">{cat.name}</p>
+            <div className="bg-white px-3 py-3 text-center">
+              <p className="text-xs font-bold text-brand-950 line-clamp-2 leading-snug group-hover:text-brand-600 transition-colors">{cat.name}</p>
             </div>
           </Link>
         ))}

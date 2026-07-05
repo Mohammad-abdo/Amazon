@@ -55,7 +55,7 @@ const Header = () => {
   }, [session, dispatch])
 
   return (
-    <header className="glass-nav border-b border-cream text-brand-950 h-[72px] w-full sticky top-0 z-50 shadow-header">
+    <header className="bg-white border-b border-brand-50 text-brand-950 h-[72px] w-full sticky top-0 z-50 shadow-header">
       <div className="h-full page-container flex items-center justify-between gap-4 xl:gap-6">
 
         <Link
@@ -75,7 +75,7 @@ const Header = () => {
 
         <form
           onSubmit={handleSearchSubmit}
-          className="flex-1 max-w-xl xl:max-w-2xl 2xl:max-w-3xl hidden md:flex h-11 relative rounded-full overflow-hidden border border-cream bg-cream/50 focus-within:border-brand-400 focus-within:ring-2 focus-within:ring-brand-400/20 transition-all duration-300"
+          className="flex-1 max-w-xl xl:max-w-2xl 2xl:max-w-3xl hidden md:flex h-11 relative rounded-full overflow-hidden border border-brand-100 bg-brand-50/60 focus-within:border-brand-400 focus-within:ring-2 focus-within:ring-brand-400/20 transition-all duration-300"
         >
           <input
             type="text"
@@ -86,7 +86,7 @@ const Header = () => {
           />
           <button
             type="submit"
-            className="w-12 h-full bg-brand-600 hover:bg-brand-500 text-white flex items-center justify-center cursor-pointer transition-colors duration-200 rounded-full m-0.5"
+            className="w-12 h-full bg-brand-950 hover:bg-brand-800 text-white flex items-center justify-center cursor-pointer transition-colors duration-200 rounded-full m-0.5"
             title="Search"
           >
             <SearchIcon className="text-lg" />

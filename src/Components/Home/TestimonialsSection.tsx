@@ -46,7 +46,7 @@ const TestimonialsSection = ({ testimonials }: props) => {
         {testimonials.slice(0, 6).map((item, idx) => (
           <div
             key={item.id}
-            className="bg-white/90 border border-brand-100 rounded-3xl p-6 shadow-soft hover:shadow-card hover:border-brand-300 transition-all duration-300 flex flex-col"
+            className="group bg-white rounded-3xl p-6 shadow-soft hover:shadow-card transition-all duration-300 flex flex-col text-center"
           >
             <div className="flex items-center gap-1 mb-4">
               {Array.from({ length: 5 }).map((_, i) => (

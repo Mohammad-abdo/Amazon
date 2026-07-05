@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useLanguage } from '@/contexts/LanguageContext'
-import { HiOutlineMail } from 'react-icons/hi'
 
 const NewsletterSection = () => {
   const { t } = useLanguage()
@@ -15,32 +14,29 @@ const NewsletterSection = () => {
   }
 
   return (
-    <section className="mt-12 w-full mb-4">
-      <div className="relative overflow-hidden rounded-3xl vibrant-panel-soft p-8 sm:p-12">
-        <div className="absolute top-0 right-0 w-48 h-48 bg-brand-300/30 rounded-full -translate-y-1/2 translate-x-1/3 blur-2xl" />
-        <div className="absolute bottom-0 left-0 w-40 h-40 bg-brand-400/20 rounded-full translate-y-1/2 -translate-x-1/4 blur-xl" />
-        <div className="relative max-w-xl mx-auto text-center">
-          <div className="w-12 h-12 rounded-2xl bg-brand-500 flex items-center justify-center mx-auto mb-4 shadow-glow">
-            <HiOutlineMail className="text-white text-2xl" />
+    <section className="mt-14 w-full -mx-4 sm:-mx-6 lg:-mx-8 xl:-mx-10 2xl:-mx-12">
+      <div className="bg-brand-500 px-4 sm:px-8 lg:px-12 py-8 sm:py-10">
+        <div className="max-w-4xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div className="text-center md:text-left">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-white mb-1">{t('home.newsletterTitle')}</h2>
+            <p className="text-sm text-brand-100">{t('home.newsletterSubtitle')}</p>
           </div>
-          <h2 className="text-2xl font-extrabold text-ink mb-2">{t('home.newsletterTitle')}</h2>
-          <p className="text-sm text-brand-800/80 mb-6">{t('home.newsletterSubtitle')}</p>
 
           {submitted ? (
-            <p className="text-brand-600 font-semibold text-sm">{t('home.newsletterSuccess')}</p>
+            <p className="text-white font-semibold text-sm text-center">{t('home.newsletterSuccess')}</p>
           ) : (
-            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 w-full md:max-w-md flex-shrink-0">
               <input
                 type="email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder={t('home.newsletterPlaceholder')}
-                className="flex-1 h-11 px-4 rounded-xl bg-white border border-brand-200 text-ink placeholder:text-brand-400/70 text-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-400/25 shadow-sm"
+                className="flex-1 h-12 px-5 rounded-full bg-white text-brand-950 placeholder:text-neutral-400 text-sm outline-none focus:ring-2 focus:ring-brand-300 shadow-sm"
               />
               <button
                 type="submit"
-                className="h-11 px-6 bg-brand-500 hover:bg-brand-400 text-white rounded-xl font-semibold text-sm transition-all shadow-glow hover:scale-[1.02] whitespace-nowrap"
+                className="h-12 px-8 bg-brand-950 hover:bg-brand-800 text-white rounded-full font-bold text-sm transition-all hover:scale-[1.02] whitespace-nowrap shadow-md"
               >
                 {t('home.newsletterBtn')}
               </button>

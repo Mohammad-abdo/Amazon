@@ -37,14 +37,14 @@ const Banner = ({ compact = false }: BannerProps) => {
         className="w-full"
       >
         {slides.map((slide, idx) => (
-          <div key={idx} className={`relative w-full bg-brand-600 ${compact ? 'h-[32vh] md:h-[46vh] xl:h-[52vh] 2xl:h-[58vh]' : 'md:h-[70vh] h-[40vh]'}`}>
+          <div key={idx} className={`relative w-full bg-brand-950 ${compact ? 'h-[32vh] md:h-[46vh] xl:h-[52vh] 2xl:h-[58vh]' : 'md:h-[70vh] h-[40vh]'}`}>
             <Image
               priority={idx === 0}
               src={slide.image}
-              className="w-full h-full object-cover opacity-85"
+              className="w-full h-full object-cover opacity-90"
               alt={slide.title}
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-brand-700/55 via-brand-500/25 to-transparent flex flex-col justify-center items-start px-6 md:px-20 text-left z-10">
+            <div className="absolute inset-0 bg-gradient-to-r from-brand-950/70 via-brand-950/30 to-transparent flex flex-col justify-center items-start px-6 md:px-20 text-left z-10">
               <span className="text-xs md:text-sm text-brand-100 font-bold uppercase tracking-widest mb-2">
                 {slide.tag}
               </span>
@@ -63,7 +63,7 @@ const Banner = ({ compact = false }: BannerProps) => {
           </div>
         ))}
       </Carousel>
-      <div className="w-full h-24 bg-gradient-to-t from-surface to-transparent absolute bottom-0 z-20"></div>
+      <div className="w-full h-16 bg-gradient-to-t from-white to-transparent absolute bottom-0 z-20"></div>
     </div>
   );
 };

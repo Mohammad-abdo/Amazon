@@ -15,9 +15,27 @@
   }
 
   body {
-    @apply text-ink antialiased selection:bg-brand-400 selection:text-white font-bodyFont;
-    background: linear-gradient(180deg, #FFF5EB 0%, #FFFBF7 35%, #FEF4E8 100%);
-    background-attachment: fixed;
+    @apply text-brand-950 antialiased selection:bg-brand-400 selection:text-white font-bodyFont;
+    background: #ffffff;
+  }
+}
+
+@layer utilities {
+  .pill-card {
+    @apply rounded-[2.5rem] overflow-hidden;
+  }
+
+  .pastel-blob {
+    @apply absolute rounded-full blur-3xl opacity-70 pointer-events-none;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
   }
 }
 
@@ -35,7 +53,7 @@
   }
 
   .vibrant-panel-soft {
-    @apply bg-orange-soft border border-brand-200 text-ink shadow-soft;
+    @apply bg-orange-soft border border-brand-200 text-brand-950 shadow-soft;
   }
 }
 

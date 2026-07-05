@@ -8,6 +8,8 @@ import DealsBanner from '@/Components/Home/DealsBanner'
 import StatsSection from '@/Components/Home/StatsSection'
 import PromoCards from '@/Components/Home/PromoCards'
 import CategoryShowcase from '@/Components/Home/CategoryShowcase'
+import PillShowcase from '@/Components/Home/PillShowcase'
+import FeaturedSplitSection from '@/Components/Home/FeaturedSplitSection'
 import TopRatedSection from '@/Components/Home/TopRatedSection'
 import ShippingCountriesSection from '@/Components/Home/ShippingCountriesSection'
 import TestimonialsSection from '@/Components/Home/TestimonialsSection'
@@ -66,15 +68,16 @@ export default function Home({
       <main className="min-h-screen pb-20">
         <div className="page-container">
           <HeroSection categories={categories} />
-          <ExchangeRateBar rates={rates} />
-          <StatsSection />
           <FeatureStrip />
+          <PillShowcase products={featured} />
           <PromoCards />
+          <FeaturedSplitSection products={featured} />
           <DealsBanner />
           <CategoryShowcase categories={categories} />
-          <ProductSection title={t('home.featuredTitle')} viewAllHref="/categories" productData={featured} />
           <TopRatedSection items={topRated} />
           <ProductSection title={t('home.newArrivalsTitle')} viewAllHref="/categories" productData={newArrivals} />
+          <ExchangeRateBar rates={rates} />
+          <StatsSection />
           <ShippingCountriesSection countries={countries} />
           <QuoteBanner quote={quote} />
           <TestimonialsSection testimonials={testimonials} />

@@ -35,6 +35,14 @@ const config: Config = {
         cream: '#F2E9E1',
         peach: '#FFF5EB',
         ink: '#523120',
+        pastel: {
+          pink: '#FDE8F0',
+          blue: '#E3F0FF',
+          mint: '#E0F5EE',
+          lavender: '#EDE8FD',
+          yellow: '#FFF6E0',
+          sand: '#FFF0E6',
+        },
         brand: {
           50: '#FFFBF5',
           100: '#FEF4E8',
