@@ -14,6 +14,8 @@ import { PersistGate } from 'redux-persist/integration/react'
 
 
 import nextReducer from './nextslice'
+import ordersReducer from './ordersSlice'
+import reviewsReducer from './reviewsSlice'
 
 
 const persistConfig = {
@@ -22,9 +24,27 @@ const persistConfig = {
   storage,
 }
 
+const ordersPersistConfig = {
+  key: 'orders',
+  version: 1,
+  storage,
+}
+
+const reviewsPersistConfig = {
+  key: 'reviews',
+  version: 1,
+  storage,
+}
+
 const persistedReducer = persistReducer(persistConfig, nextReducer)
+const persistedOrdersReducer = persistReducer(ordersPersistConfig, ordersReducer)
+const persistedReviewsReducer = persistReducer(reviewsPersistConfig, reviewsReducer)
 export const store = configureStore({
-  reducer: {next:persistedReducer},
+  reducer: {
+    next: persistedReducer,
+    orders: persistedOrdersReducer,
+    reviews: persistedReviewsReducer,
+  },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {

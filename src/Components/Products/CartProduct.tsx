@@ -1,26 +1,14 @@
 import React from 'react'
-import Image from 'next/image'
 import FormattedPrice from './FormattedPrice'
+import ProductImage from './ProductImage'
 import { IoMdClose as CloseIcon } from "react-icons/io"
 import { LuMinus, LuPlus } from "react-icons/lu"
 import { useDispatch } from 'react-redux'
 import { decressQuantaty, deleteProduct, incressQuantaty } from '@/store/nextslice'
-
-interface item {
-  brand: string
-  category: string
-  description: string
-  image: string
-  isNew: boolean
-  oldPrice: number
-  price: number
-  title: string
-  _id: number
-  quantaty: number
-}
+import { storeProduct } from '../../../type'
 
 interface CartProductProps {
-  item: item
+  item: storeProduct
 }
 
 const CartProduct = ({ item }: CartProductProps) => {
@@ -30,12 +18,12 @@ const CartProduct = ({ item }: CartProductProps) => {
     <div className="bg-white border border-slate-100 rounded-2xl p-4 flex flex-col sm:flex-row items-center gap-4 sm:gap-6 shadow-sm hover:shadow-md transition-shadow duration-300">
       {/* Product Image */}
       <div className="relative w-32 h-32 bg-slate-50 rounded-xl overflow-hidden flex-shrink-0 flex items-center justify-center border border-slate-100 p-2">
-        <Image 
-          width={120} 
-          height={120} 
-          src={item.image} 
-          alt={item.title} 
-          className="object-contain w-full h-full transform hover:scale-105 transition-transform duration-300" 
+        <ProductImage
+          width={120}
+          height={120}
+          src={item.image}
+          alt={item.title}
+          className="object-contain w-full h-full transform hover:scale-105 transition-transform duration-300"
         />
       </div>
 

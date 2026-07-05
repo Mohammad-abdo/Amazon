@@ -23,10 +23,16 @@ const Footer = () => {
                   <Link href="/" className="hover:text-indigo-400 transition-colors duration-200">Home</Link>
                 </li>
                 <li>
+                  <Link href="/categories" className="hover:text-indigo-400 transition-colors duration-200">Categories</Link>
+                </li>
+                <li>
                   <Link href="/cart" className="hover:text-indigo-400 transition-colors duration-200">Shopping Cart</Link>
                 </li>
                 <li>
                   <Link href="/favorites" className="hover:text-indigo-400 transition-colors duration-200">Favorites & Wishlist</Link>
+                </li>
+                <li>
+                  <Link href="/account/orders" className="hover:text-indigo-400 transition-colors duration-200">Order History</Link>
                 </li>
               </ul>
             </div>
@@ -34,24 +40,21 @@ const Footer = () => {
               <h2 className="mb-5 text-xs font-semibold text-white uppercase tracking-wider">Support</h2>
               <ul className="text-sm space-y-3">
                 <li>
-                  <a href="#" className="hover:text-indigo-400 transition-colors duration-200">Customer Service</a>
+                  <Link href="/contact" className="hover:text-indigo-400 transition-colors duration-200">Contact Us</Link>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-indigo-400 transition-colors duration-200">Gift Cards</a>
+                  <Link href="/faq" className="hover:text-indigo-400 transition-colors duration-200">FAQ</Link>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-indigo-400 transition-colors duration-200">Registry</a>
+                  <Link href="/account" className="hover:text-indigo-400 transition-colors duration-200">My Account</Link>
                 </li>
               </ul>
             </div>
             <div className="col-span-2 md:col-span-1">
-              <h2 className="mb-5 text-xs font-semibold text-white uppercase tracking-wider">Legal</h2>
+              <h2 className="mb-5 text-xs font-semibold text-white uppercase tracking-wider">Company</h2>
               <ul className="text-sm space-y-3">
                 <li>
-                  <a href="#" className="hover:text-indigo-400 transition-colors duration-200">Privacy Policy</a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-indigo-400 transition-colors duration-200">Terms &amp; Conditions</a>
+                  <Link href="/about" className="hover:text-indigo-400 transition-colors duration-200">About Us</Link>
                 </li>
               </ul>
             </div>

@@ -1,7 +1,7 @@
 import React from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 import FormattedPrice from './FormattedPrice'
+import ProductImage from './ProductImage'
 import { HiShoppingCart } from 'react-icons/hi'
 import { FaHeart } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
@@ -10,18 +10,21 @@ import { productProps, StateProps, storeProduct } from '../../../type'
 
 const ProductCard = ({
   _id,
+  slug,
   title,
   description,
   price,
-  brand,
   oldPrice,
   category,
+  categorySlug,
+  categoryId,
   image,
+  images,
   isNew,
 }: productProps) => {
   const dispatch = useDispatch()
   const { favoriteData } = useSelector((state: StateProps) => state.next)
-  
+
   // Check if item is already in favorites to color the heart icon
   const isFavorited = favoriteData.some((item: storeProduct) => item._id === _id)
 
@@ -31,9 +34,12 @@ const ProductCard = ({
     dispatch(
       addToCart({
         _id,
-        brand,
+        slug,
         category,
+        categorySlug,
+        categoryId,
         image,
+        images,
         description,
         isNew,
         oldPrice,
@@ -50,9 +56,12 @@ const ProductCard = ({
     dispatch(
       addToFavorite({
         _id,
-        brand,
+        slug,
         category,
+        categorySlug,
+        categoryId,
         image,
+        images,
         description,
         isNew,
         oldPrice,
@@ -70,7 +79,7 @@ const ProductCard = ({
       {/* Product Image Panel */}
       <div className="relative w-full pt-[85%] bg-slate-50 overflow-hidden cursor-pointer">
         <Link href={`/product/${_id}`}>
-          <Image
+          <ProductImage
             src={image}
             alt={title}
             fill

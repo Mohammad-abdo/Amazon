@@ -7,6 +7,7 @@ import { HiOutlineSearch as SearchIcon } from 'react-icons/hi'
 import { SlLocationPin } from 'react-icons/sl'
 import { FaHeart } from 'react-icons/fa'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
 import { StateProps } from '../../../type'
 import { useSession, signIn, signOut } from "next-auth/react"
@@ -17,8 +18,23 @@ const Header = () => {
     (state: StateProps) => state.next
   )
   const [cartlength, setCartlength] = useState(0)
+  const [searchQuery, setSearchQuery] = useState('')
   const dispatch = useDispatch()
+  const router = useRouter()
   const { data: session } = useSession()
+
+  useEffect(() => {
+    if (router.pathname === '/search') {
+      setSearchQuery(typeof router.query.q === 'string' ? router.query.q : '')
+    }
+  }, [router.pathname, router.query.q])
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    const query = searchQuery.trim()
+    if (!query) return
+    router.push(`/search?q=${encodeURIComponent(query)}`)
+  }
 
   useEffect(() => {
     setCartlength(productData.length)
@@ -60,20 +76,25 @@ const Header = () => {
         </div>
 
         {/* Premium Search Bar */}
-        <div className="flex-1 max-w-xl hidden md:flex h-10 relative rounded-xl overflow-hidden border border-slate-700 bg-slate-900 focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500 transition-all duration-300">
-          <input 
-            type="text" 
+        <form
+          onSubmit={handleSearchSubmit}
+          className="flex-1 max-w-xl hidden md:flex h-10 relative rounded-xl overflow-hidden border border-slate-700 bg-slate-900 focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500 transition-all duration-300"
+        >
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search premium products..."
-            className="w-full h-full bg-transparent px-4 py-2 text-sm text-slate-100 placeholder:text-slate-500 outline-none border-none focus:outline-none" 
+            className="w-full h-full bg-transparent px-4 py-2 text-sm text-slate-100 placeholder:text-slate-500 outline-none border-none focus:outline-none"
           />
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             className="w-12 h-full bg-indigo-600 hover:bg-indigo-500 text-white flex items-center justify-center cursor-pointer transition-colors duration-200"
             title="Search"
           >
             <SearchIcon className="text-lg" />
           </button>
-        </div>
+        </form>
 
         {/* Right Nav Options */}
         <div className="flex items-center gap-2 sm:gap-4">

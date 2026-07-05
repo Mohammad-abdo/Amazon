@@ -1,10 +1,10 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { StateProps, storeProduct } from '../../type'
-import Image from 'next/image'
 import Link from 'next/link'
 import Head from 'next/head'
 import FormattedPrice from '@/Components/Products/FormattedPrice'
+import ProductImage from '@/Components/Products/ProductImage'
 import { deleteFavorite, addToCart } from '@/store/nextslice'
 import { FaHeartBroken } from 'react-icons/fa'
 import { HiOutlineHeart as HeartIcon, HiShoppingCart } from 'react-icons/hi'
@@ -17,15 +17,7 @@ const Favorites = () => {
   const handleAddToCart = (item: storeProduct) => {
     dispatch(
       addToCart({
-        _id: item._id,
-        brand: item.brand,
-        category: item.category,
-        image: item.image,
-        description: item.description,
-        isNew: item.isNew,
-        oldPrice: item.oldPrice,
-        price: item.price,
-        title: item.title,
+        ...item,
         quantaty: 1,
       })
     )
@@ -58,12 +50,12 @@ const Favorites = () => {
                 {/* Product Image */}
                 <div className="relative w-28 h-28 bg-slate-50 rounded-xl overflow-hidden flex-shrink-0 flex items-center justify-center border border-slate-100 p-2">
                   <Link href={`/product/${item._id}`}>
-                    <Image 
-                      width={100} 
-                      height={100} 
-                      src={item.image} 
-                      alt={item.title} 
-                      className="object-contain w-full h-full transform hover:scale-105 transition-transform duration-300" 
+                    <ProductImage
+                      width={100}
+                      height={100}
+                      src={item.image}
+                      alt={item.title}
+                      className="object-contain w-full h-full transform hover:scale-105 transition-transform duration-300"
                     />
                   </Link>
                 </div>

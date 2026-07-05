@@ -19,7 +19,7 @@ const CartPyment = () => {
   }, [productData])
 
   const handleCheckout = () => {
-    router.push('/success')
+    router.push('/checkout')
   }
 
   return (

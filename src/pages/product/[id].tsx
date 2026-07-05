@@ -1,11 +1,14 @@
-import React from 'react'
-import { GetServerSideProps } from 'next'
-import Image from 'next/image'
+import React, { useState } from 'react'
+import { GetStaticPaths, GetStaticProps } from 'next'
 import Link from 'next/link'
 import FormattedPrice from '@/Components/Products/FormattedPrice'
+import ProductImage from '@/Components/Products/ProductImage'
+import ProductCard from '@/Components/Products/ProductCard'
 import { useDispatch, useSelector } from 'react-redux'
 import { addToCart, addToFavorite } from '@/store/nextslice'
+import { addReview } from '@/store/reviewsSlice'
 import { productProps, StateProps, storeProduct } from '../../../type'
+import { getProductById, getProducts, getRelatedProducts } from '@/lib/api'
 import { HiShoppingCart } from 'react-icons/hi'
 import { FaHeart, FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa'
 import { IoMdArrowBack } from 'react-icons/io'
@@ -13,12 +16,31 @@ import { MdVerifiedUser, MdOutlineLocalShipping } from 'react-icons/md'
 
 interface ProductPageProps {
   product: productProps
+  relatedProducts: productProps[]
 }
 
-const ProductDetail = ({ product }: ProductPageProps) => {
+const renderStars = (ratingVal: number) => {
+  const stars = []
+  const floor = Math.floor(ratingVal)
+  for (let i = 1; i <= 5; i++) {
+    if (i <= floor) {
+      stars.push(<FaStar key={i} className="text-amber-400" />)
+    } else if (i === floor + 1 && ratingVal % 1 >= 0.3) {
+      stars.push(<FaStarHalfAlt key={i} className="text-amber-400" />)
+    } else {
+      stars.push(<FaRegStar key={i} className="text-slate-300" />)
+    }
+  }
+  return stars
+}
+
+const ProductDetail = ({ product, relatedProducts }: ProductPageProps) => {
   const dispatch = useDispatch()
   const { favoriteData } = useSelector((state: StateProps) => state.next)
-  
+  const { reviews } = useSelector((state: StateProps) => state.reviews)
+
+  const [reviewForm, setReviewForm] = useState({ author: '', rating: 5, comment: '' })
+
   if (!product) return (
     <div className="min-h-[60vh] flex flex-col items-center justify-center bg-slate-50">
       <h2 className="text-xl font-semibold text-slate-700">Product not found</h2>
@@ -30,41 +52,34 @@ const ProductDetail = ({ product }: ProductPageProps) => {
   const discountAmount = product.oldPrice - product.price
   const percentSaved = Math.round((discountAmount / product.oldPrice) * 100)
 
-  // Generate mock rating stars based on product id
-  const rating = 4.2 + (product._id % 9) / 10
-  const reviewsCount = 42 + (product._id % 200)
-
-  const renderStars = (ratingVal: number) => {
-    const stars = []
-    const floor = Math.floor(ratingVal)
-    for (let i = 1; i <= 5; i++) {
-      if (i <= floor) {
-        stars.push(<FaStar key={i} className="text-amber-400" />)
-      } else if (i === floor + 1 && ratingVal % 1 >= 0.3) {
-        stars.push(<FaStarHalfAlt key={i} className="text-amber-400" />)
-      } else {
-        stars.push(<FaRegStar key={i} className="text-slate-300" />)
-      }
-    }
-    return stars
-  }
+  const productReviews = reviews.filter((r) => r.productId === product._id)
+  const rating = productReviews.length
+    ? productReviews.reduce((sum, r) => sum + r.rating, 0) / productReviews.length
+    : 0
 
   const handleAddToCart = () => {
-    dispatch(
-      addToCart({
-        ...product,
-        quantaty: 1
-      })
-    )
+    dispatch(addToCart({ ...product, quantaty: 1 }))
   }
 
   const handleAddToFavorite = () => {
+    dispatch(addToFavorite({ ...product, quantaty: 1 }))
+  }
+
+  const handleSubmitReview = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!reviewForm.author.trim() || !reviewForm.comment.trim()) return
+
     dispatch(
-      addToFavorite({
-        ...product,
-        quantaty: 1
+      addReview({
+        id: `${product._id}-${reviewForm.author}-${productReviews.length}-${reviewForm.comment.length}`,
+        productId: product._id,
+        author: reviewForm.author.trim(),
+        rating: reviewForm.rating as 1 | 2 | 3 | 4 | 5,
+        comment: reviewForm.comment.trim(),
+        createdAt: new Date().toISOString(),
       })
     )
+    setReviewForm({ author: '', rating: 5, comment: '' })
   }
 
   return (
@@ -72,8 +87,8 @@ const ProductDetail = ({ product }: ProductPageProps) => {
       <div className="max-w-6xl mx-auto">
         {/* Navigation Breadcrumb & Back button */}
         <div className="flex items-center justify-between mb-8">
-          <Link 
-            href="/" 
+          <Link
+            href="/"
             className="flex items-center gap-1.5 text-xs md:text-sm font-semibold text-slate-500 hover:text-slate-800 transition-colors"
           >
             <IoMdArrowBack className="text-base" />
@@ -82,18 +97,18 @@ const ProductDetail = ({ product }: ProductPageProps) => {
           <div className="text-xs text-slate-400 font-medium">
             <Link href="/" className="hover:underline">Home</Link>
             <span className="mx-2">&gt;</span>
-            <span className="text-slate-500">{product.category}</span>
+            <Link href={`/category/${product.categorySlug}`} className="hover:underline text-slate-500">{product.category}</Link>
           </div>
         </div>
 
         {/* Dynamic Showcase Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 bg-white border border-slate-100 p-6 md:p-10 rounded-3xl shadow-sm">
-          
+
           {/* Left Column: Product Image Media */}
           <div className="relative bg-slate-50 border border-slate-100 rounded-2xl flex items-center justify-center p-8 aspect-square overflow-hidden group">
-            <Image 
-              src={product.image} 
-              alt={product.title} 
+            <ProductImage
+              src={product.image}
+              alt={product.title}
               fill
               sizes="(max-w-768px) 100vw, 500px"
               priority
@@ -109,23 +124,23 @@ const ProductDetail = ({ product }: ProductPageProps) => {
           {/* Right Column: Specifications & CTAs */}
           <div className="flex flex-col justify-between">
             <div>
-              {/* Category, Brand, & Title */}
+              {/* Category & Title */}
               <span className="text-xs text-indigo-650 font-bold uppercase tracking-widest block mb-1">
                 {product.category}
               </span>
               <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 leading-tight mb-2">
                 {product.title}
               </h1>
-              
+
               <div className="flex items-center gap-3 mb-4">
-                <span className="bg-slate-100 text-slate-600 text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider">
-                  Brand: {product.brand}
-                </span>
-                
                 {/* Rating display */}
                 <div className="flex items-center gap-1.5 text-xs font-semibold">
                   <div className="flex items-center">{renderStars(rating)}</div>
-                  <span className="text-slate-500">({reviewsCount} reviews)</span>
+                  <span className="text-slate-500">
+                    {productReviews.length > 0
+                      ? `${rating.toFixed(1)} (${productReviews.length} review${productReviews.length === 1 ? '' : 's'})`
+                      : 'No reviews yet'}
+                  </span>
                 </div>
               </div>
 
@@ -186,12 +201,12 @@ const ProductDetail = ({ product }: ProductPageProps) => {
                 <HiShoppingCart className="text-lg" />
                 Add to Shopping Cart
               </button>
-              
+
               <button
                 onClick={handleAddToFavorite}
                 className={`h-12 px-6 border rounded-xl flex items-center justify-center transition-all duration-300 font-semibold text-sm ${
-                  isFavorited 
-                    ? 'border-red-200 bg-red-50 text-red-500 hover:bg-red-100/55' 
+                  isFavorited
+                    ? 'border-red-200 bg-red-50 text-red-500 hover:bg-red-100/55'
                     : 'border-slate-200 bg-white text-slate-500 hover:text-red-500 hover:border-red-200'
                 }`}
                 title="Save to Favorites"
@@ -205,33 +220,108 @@ const ProductDetail = ({ product }: ProductPageProps) => {
 
         </div>
 
+        {/* Reviews */}
+        <div className="mt-10 bg-white border border-slate-100 rounded-3xl p-6 md:p-10 shadow-sm">
+          <h2 className="text-xl font-bold text-slate-900 mb-6">Customer Reviews</h2>
+
+          {productReviews.length > 0 ? (
+            <div className="flex flex-col gap-4 mb-8">
+              {productReviews.map((review) => (
+                <div key={review.id} className="border border-slate-100 rounded-2xl p-4">
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="font-semibold text-sm text-slate-800">{review.author}</span>
+                    <div className="flex items-center">{renderStars(review.rating)}</div>
+                  </div>
+                  <p className="text-xs text-slate-500 leading-relaxed">{review.comment}</p>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-sm text-slate-400 mb-8">Be the first to review this product.</p>
+          )}
+
+          <form onSubmit={handleSubmitReview} className="border-t border-slate-100 pt-6 flex flex-col gap-3 max-w-lg">
+            <h3 className="text-sm font-bold text-slate-800">Write a review</h3>
+            <input
+              type="text"
+              placeholder="Your name"
+              value={reviewForm.author}
+              onChange={(e) => setReviewForm((f) => ({ ...f, author: e.target.value }))}
+              className="h-10 px-3 rounded-lg border border-slate-200 text-sm outline-none focus:border-indigo-500"
+              required
+            />
+            <select
+              value={reviewForm.rating}
+              onChange={(e) => setReviewForm((f) => ({ ...f, rating: Number(e.target.value) }))}
+              className="h-10 px-3 rounded-lg border border-slate-200 text-sm outline-none focus:border-indigo-500"
+            >
+              {[5, 4, 3, 2, 1].map((r) => (
+                <option key={r} value={r}>{r} star{r === 1 ? '' : 's'}</option>
+              ))}
+            </select>
+            <textarea
+              placeholder="Share your experience with this product"
+              value={reviewForm.comment}
+              onChange={(e) => setReviewForm((f) => ({ ...f, comment: e.target.value }))}
+              className="px-3 py-2 rounded-lg border border-slate-200 text-sm outline-none focus:border-indigo-500 resize-none h-24"
+              required
+            />
+            <button
+              type="submit"
+              className="h-10 px-6 bg-slate-900 text-white rounded-xl font-semibold text-sm hover:bg-indigo-600 transition-colors self-start"
+            >
+              Submit Review
+            </button>
+          </form>
+        </div>
+
+        {/* Related Products */}
+        {relatedProducts.length > 0 && (
+          <div className="mt-10">
+            <h2 className="text-xl font-bold text-slate-900 mb-6">You might also like</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
+              {relatedProducts.map((rp) => (
+                <ProductCard key={rp._id} {...rp} />
+              ))}
+            </div>
+          </div>
+        )}
+
       </div>
     </div>
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { id } = context.query
-
+export const getStaticPaths: GetStaticPaths = async () => {
   try {
-    const res = await fetch("https://fakestoreapiserver.reactbd.com/tech")
-    const products: productProps[] = await res.json()
-    
-    // Find the product matching the ID
-    const product = products.find((item) => item._id === Number(id)) || null
+    const products = await getProducts({ limit: 20 })
+    return {
+      paths: products.map((p) => ({ params: { id: String(p._id) } })),
+      fallback: 'blocking',
+    }
+  } catch {
+    return { paths: [], fallback: 'blocking' }
+  }
+}
 
-    return {
-      props: {
-        product,
-      },
-    }
+export const getStaticProps: GetStaticProps = async (context) => {
+  const id = Number(context.params?.id)
+
+  const product = await getProductById(id)
+  if (!product) {
+    return { notFound: true, revalidate: 60 }
+  }
+
+  let relatedProducts: productProps[] = []
+  try {
+    relatedProducts = await getRelatedProducts(product.categoryId, product._id)
   } catch (error) {
-    console.error('Error fetching product details:', error)
-    return {
-      props: {
-        product: null,
-      },
-    }
+    console.error('Error fetching related products:', error)
+  }
+
+  return {
+    props: { product, relatedProducts },
+    revalidate: 300,
   }
 }
 

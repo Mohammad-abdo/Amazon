@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import {LuMenu} from 'react-icons/lu'
 import { useDispatch, useSelector } from 'react-redux'
 import {  signOut } from "next-auth/react"
@@ -7,28 +8,23 @@ import { removeUser } from '@/store/nextslice'
 const links=[
     {
         id:1,
-        title:'Todays Deals',
-        path:"#"
+        title:'Categories',
+        path:"/categories"
     },
     {
         id:2,
         title:'Customer Service',
-        path:"#"
+        path:"/contact"
     },
     {
         id:3,
-        title:'Registry',
-        path:"#"
+        title:'FAQ',
+        path:"/faq"
     },
     {
         id:4,
-        title:'Gift Cards',
-        path:"#"
-    },
-    {
-        id:5,
-        title:'Sell',
-        path:"#"
+        title:'About Us',
+        path:"/about"
     },
 
 ]
@@ -43,18 +39,18 @@ dispatch(removeUser())
    
     <div className='bg-slate-900 text-slate-300 border-b border-slate-800 h-10 w-full text-xs sm:text-sm flex items-center px-4 justify-between'>
       <div className="flex items-center gap-1 sm:gap-2">
-        <a className='flex items-center gap-1 h-8 cursor-pointer hover:bg-slate-800 hover:text-white px-3.5 rounded-lg transition-all duration-200 font-medium'>
+        <Link href="/categories" className='flex items-center gap-1 h-8 cursor-pointer hover:bg-slate-800 hover:text-white px-3.5 rounded-lg transition-all duration-200 font-medium'>
           <LuMenu className='text-lg'/> All Categories
-        </a>
+        </Link>
         {
           links.map((link)=>(
-            <a 
-              href={link.path} 
-              key={link.id} 
+            <Link
+              href={link.path}
+              key={link.id}
               className="hover:bg-slate-800 hover:text-white hidden md:inline-flex items-center h-8 cursor-pointer px-3.5 rounded-lg transition-all duration-200 font-medium"
             >
               {link.title}
-            </a>
+            </Link>
           ))
         }
       </div>
